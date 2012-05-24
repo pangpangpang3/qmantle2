@@ -5,6 +5,8 @@ Image {
     property var behavior: wallpaperBehavior
     anchors.top: parent.top
     anchors.bottom: parent.bottom
+    sourceSize.width: width
+    sourceSize.height: height
 
     function setPosition(newX) {
         wallpaperBehavior.enabled = false;
