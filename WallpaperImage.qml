@@ -2,17 +2,22 @@ import QtQuick 2.0
 
 Image {
     id: wallpaper
-    property var anim: wallpaperAnim
+    property var behavior: wallpaperBehavior
     anchors.top: parent.top
     anchors.bottom: parent.bottom
 
-    NumberAnimation {
-        id: wallpaperAnim
-        target: wallpaper
-        properties: "x"
-        from: wallpaper.x
-        easing.type: Easing.OutExpo
-        duration: 400
+    function setPosition(newX) {
+        wallpaperBehavior.enabled = false;
+        x = newX
+        wallpaperBehavior.enabled = true
+    }
+
+    Behavior on x {
+        id: wallpaperBehavior
+        NumberAnimation {
+            easing.type: Easing.OutExpo
+            duration: 400
+        }
     }
 }
 

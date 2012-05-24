@@ -30,17 +30,14 @@ Item {
         anchors.fill: parent
 
         onPressed: {
-            wallpaperright.anim.stop()
-            wallpaper.anim.stop()
-            wallpaperleft.anim.stop()
             wallpaperContainer.pressX = mouse.x
         }
 
         onPositionChanged: {
             var delta = wallpaperContainer.pressX - mouse.x;
-            wallpaperleft.x = wallpaperleft.x - delta
-            wallpaperright.x = wallpaperright.x - delta
-            wallpaper.x = wallpaper.x - delta
+            wallpaperleft.setPosition(wallpaperleft.x - delta)
+            wallpaperright.setPosition(wallpaperright.x - delta)
+            wallpaper.setPosition(wallpaper.x - delta)
             wallpaperContainer.pressX = mouse.x
         }
 
@@ -67,10 +64,9 @@ Item {
         // looks awful
         function setXPosition(wallpaper, x) {
             if (visibleOnScreen(wallpaper)) {
-                wallpaper.anim.to = x
-                wallpaper.anim.start()
-            } else {
                 wallpaper.x = x
+            } else {
+                wallpaper.setPosition(x)
             }
         }
 
