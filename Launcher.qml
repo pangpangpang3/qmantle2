@@ -145,8 +145,6 @@ Item {
         }
     }
 
-    // TODO: basing this off homeScreen.mode using states would be nicer, but
-    // doesn't seem to work
     function show() {
         opacity = 1
     }
