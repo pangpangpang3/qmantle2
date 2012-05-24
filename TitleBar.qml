@@ -19,13 +19,24 @@ Image {
     }
 
     Text {
+        id: currentTime
         anchors.verticalCenter: launcherUnpressed.verticalCenter
         anchors.left: launcherUnpressed.right
 
-        text: Qt.formatTime(new Date) // XXX: is this efficient? also, TODO, don't update all the time and switch off when screen off
+        text: Qt.formatTime(new Date) // XXX: is this efficient?
         color: "white"
         font.pixelSize: 20
     }
+
+    Timer {
+        repeat: true
+        running: true
+        interval: 63000 // not exact timing, but doesn't matter that much, the less wakeups the better
+        onTriggered: {
+            currentTime.text = Qt.formatTime(new Date) // TODO: don't update when screen is off
+        }
+    }
+
 
     MouseArea {
         id: mouseArea
