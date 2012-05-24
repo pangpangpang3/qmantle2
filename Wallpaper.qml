@@ -4,26 +4,29 @@ Item {
     id: wallpaperContainer
     anchors.fill: parent
     property var pressX
+    property var leftMost: one
+    property var center: two
+    property var rightMost: three
 
     WallpaperImage {
-        id: wallpaperleft
+        id: one
         source: "12030001.jpg"
-        x: -wallpaper.width
-        width: wallpaper.width
+
+        x: -wallpaperContainer.width
     }
 
     WallpaperImage {
-        id: wallpaper
+        id: two
         source: "wallpaper.jpg"
-        x: 0
-        width: parent.width
+
+        anchors.left: one.right
     }
 
     WallpaperImage {
-        id: wallpaperright
+        id: three
         source: "12050006.jpg"
-        x: wallpaper.width
-        width: wallpaper.width
+
+        anchors.left: two.right
     }
 
     MouseArea {
@@ -33,68 +36,82 @@ Item {
             wallpaperContainer.pressX = mouse.x
         }
 
+        function findLowest(objArr) {
+            var tmp = 100000 // 100k pixels is enough for anyone
+            var lowest = 0;
+
+            for (var i = 0; i < objArr.length; ++i) {
+                if (objArr[i].x < tmp) {
+                    tmp = objArr[i].x
+                    lowest = i
+                }
+            }
+
+            var obj = objArr[lowest].obj
+            objArr.splice(lowest, 1)
+            return obj
+        }
+
+        function updatePositions() {
+            // you'd think I could just pass one, two, three directly into an
+            // array. hahahahaha. doesn't seem to work.
+            var o1 = new Object; o1.x = one.x;   o1.obj = one
+            var o2 = new Object; o2.x = two.x;   o2.obj = two
+            var o3 = new Object; o3.x = three.x; o3.obj = three
+
+            var arr = [ o1, o2, o3 ]
+
+            leftMost = findLowest(arr);
+            center = findLowest(arr);
+            rightMost = findLowest(arr);
+
+            leftMost.anchors.left = undefined
+            leftMost.anchors.right = undefined
+            center.anchors.left = leftMost.right
+            center.anchors.right = undefined
+            rightMost.anchors.left = center.right
+            rightMost.anchors.right = undefined
+        }
+
+        function swapLeft() {
+            // swap leftmost to right
+            console.log("Swapping leftmost right")
+            leftMost.anchors.left = undefined
+            leftMost.anchors.right = undefined
+            center.anchors.left = undefined
+            center.anchors.right = undefined
+            leftMost.setPosition(rightMost.x + wallpaperContainer.width * 2)
+            updatePositions()
+        }
+
+        function swapRight() {
+            // we need to swap rightmost to left
+            console.log("Swapping rightmost left")
+            rightMost.anchors.left = undefined
+            rightMost.anchors.right = undefined
+            rightMost.setPosition(leftMost.x - wallpaperContainer.width)
+            updatePositions()
+        }
+
         onPositionChanged: {
-            var delta = wallpaperContainer.pressX - mouse.x;
-            wallpaperleft.setPosition(wallpaperleft.x - delta)
-            wallpaperright.setPosition(wallpaperright.x - delta)
-            wallpaper.setPosition(wallpaper.x - delta)
+            leftMost.setPosition(leftMost.x - (wallpaperContainer.pressX - mouse.x))
             wallpaperContainer.pressX = mouse.x
-        }
 
-        function visibleOnScreen(wallpaper) {
-            //console.log("x " + wallpaper.x + " width " + wallpaper.width)
-            if (wallpaper.x > 0 && wallpaper.x < wallpaper.width)
-                return wallpaper.width - wallpaper.x
-            if (wallpaper.x > wallpaper.width)
-                return 0
-            if (wallpaper.x < -wallpaper.width)
-                return 0
-            return Math.abs(wallpaper.x + wallpaper.width)
-        }
-
-        // TODO: this doesn't quite do it, bounceback on the animation
-        // effect means that we see a bit of white edge.. not sure how we
-        // can wrap that around better, perhaps anchoring.. but it's not
-        // straightforward to me at least
-        //
-        // TODO: there's a fun bug here (well, two of them).. when clicking
-        // and instantly releasing (i.e. no drag), it seems to rotate
-        // images, which wouldn't be so bad,  but.. double clicking seems to
-        // rotate them in such a way that the animation is visible, which
-        // looks awful
-        function setXPosition(wallpaper, x) {
-            if (visibleOnScreen(wallpaper)) {
-                wallpaper.x = x
-            } else {
-                wallpaper.setPosition(x)
+            if (leftMost.x >= 0) {
+                swapRight()
+            } else if (rightMost.x + rightMost.width <= wallpaperContainer.width) {
+                swapLeft()
             }
         }
 
         onReleased: {
-            var leftDelta = visibleOnScreen(wallpaperleft)
-            //console.log("left " + leftDelta)
-            var centerDelta = visibleOnScreen(wallpaper)
-            //console.log("center " + centerDelta)
-            var rightDelta = visibleOnScreen(wallpaperright)
-            //console.log("right " + rightDelta)
-
-            var leftWins = leftDelta > centerDelta && leftDelta > rightDelta
-            var centerWins = centerDelta > rightDelta && centerDelta > leftDelta
-            var rightWins = rightDelta > centerDelta && rightDelta > leftDelta
-
-            if (centerWins) {
-                setXPosition(wallpaperright, wallpaper.width)
-                setXPosition(wallpaper, 0)
-                setXPosition(wallpaperleft, -wallpaper.width)
-            } else if (leftWins) {
-                setXPosition(wallpaperright, -wallpaper.width)
-                setXPosition(wallpaper, wallpaper.width)
-                setXPosition(wallpaperleft, 0)
-            } else if (rightWins) {
-                setXPosition(wallpaperright, 0)
-                setXPosition(wallpaper, -wallpaper.width)
-                setXPosition(wallpaperleft, wallpaper.width)
+            // decide whether we need to adjust a snap in a different direction
+            if (center.x >= wallpaperContainer.width / 3) {
+                swapRight()
+            } else if (center.x < -(wallpaperContainer.width / 3)) {
+                swapLeft()
             }
+            leftMost.x = -wallpaperContainer.width
         }
     }
 }

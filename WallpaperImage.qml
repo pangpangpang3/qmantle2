@@ -7,6 +7,7 @@ Image {
     anchors.bottom: parent.bottom
     sourceSize.width: width
     sourceSize.height: height
+    width: parent.width
 
     function setPosition(newX) {
         wallpaperBehavior.enabled = false;
