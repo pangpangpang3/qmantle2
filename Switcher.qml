@@ -112,11 +112,11 @@ Item {
 
             height = oheight = item.height
             width = owidth = item.width
-            opacity = 1
 
             isOpen = true
             width = switcher.width
             height = switcher.height
+            opacity = 1
         }
 
         function close() {
