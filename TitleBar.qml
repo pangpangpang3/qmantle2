@@ -1,9 +1,9 @@
 import QtQuick 2.0
 
 Image {
-    anchors.top: homeScreen.top
-    anchors.left: homeScreen.left
-    anchors.right: homeScreen.right
+    anchors.top: parent.top
+    anchors.left: parent.left
+    anchors.right: parent.right
     source: "images/wmTitleBar.png";
     fillMode: Image.TileHorizontally
 

@@ -11,7 +11,7 @@ Item {
         color: "black"
         width: 400
         height: 500
-        opacity: 0.8
+        opacity: 0.5
         anchors.fill: parent
     }
 
@@ -146,10 +146,13 @@ Item {
     }
 
     function show() {
+        // TODO: would be nice to have this set by a binding somehow
+        homeScreen.blurRadius = 32
         opacity = 1
     }
 
     function hide() {
+        homeScreen.blurRadius = 0
         opacity = 0
     }
 
