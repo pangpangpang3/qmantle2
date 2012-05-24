@@ -19,6 +19,26 @@ Item {
         }
 
         TitleBar {
+            id: titleBar
+
+            Rectangle {
+                anchors.right: titleBar.right
+                anchors.top: titleBar.top
+                anchors.bottom: titleBar.bottom
+                color: "red"
+                width: switcherButton.paintedWidth + 30
+
+                Text {
+                    id: switcherButton
+                    anchors.centerIn: parent
+                    text: "Open Switcher"
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: switcher.show()
+                }
+            }
         }
     }
 
@@ -33,6 +53,10 @@ Item {
                 duration: 500
             }
         }
+    }
+
+    Switcher {
+        id: switcher
     }
 
     Launcher {
