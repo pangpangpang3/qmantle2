@@ -7,20 +7,15 @@ Image {
     source: "images/wmTitleBar.png";
     fillMode: Image.TileHorizontally
 
-    Image {
+    TitleIcon {
         id: launcherUnpressed
-        anchors.left: parent.left
-        anchors.top: parent.top
         source: "images/wmTaskLauncherIcon.png"
-        opacity: 1
+        opacity: !mouseArea.pressed
     }
 
-    Image {
-        id: launcherPressed
-        anchors.left: parent.left
-        anchors.top: parent.top
+    TitleIcon {
         source: "images/wmTaskLauncherIconPressed.png"
-        opacity: 0
+        opacity: mouseArea.pressed
     }
 
     Text {
@@ -38,44 +33,6 @@ Image {
 
         onClicked: {
             homeScreen.toggleModeChange();
-        }
-    }
-
-    states: [
-        State {
-            name: "pressed"
-            when: mouseArea.pressed
-            PropertyChanges {
-                target: launcherUnpressed
-                opacity: 0
-            }
-
-            PropertyChanges {
-                target: launcherPressed
-                opacity: 1
-            }
-        },
-
-        State {
-            name: "unpressed"
-            when: !mouseArea.pressed
-            PropertyChanges {
-                target: launcherUnpressed
-                opacity: 1
-            }
-
-            PropertyChanges {
-                target: launcherPressed
-                opacity: 0
-            }
-        }
-    ]
-
-    transitions: Transition {
-        NumberAnimation {
-            properties: "opacity"
-            easing.type: Easing.InOutQuad
-            duration: 200
         }
     }
 }
