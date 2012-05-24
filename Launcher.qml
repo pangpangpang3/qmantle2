@@ -3,8 +3,8 @@ import QtQuick 2.0
 Item {
     id: launcher
     state: "invisible"
-    property bool fuckingVisible: false // yes, this is hideous, but setting state directly breaks
     anchors.fill: parent
+    opacity: 0
 
     Rectangle {
         id: wallpaper
@@ -148,36 +148,15 @@ Item {
     // TODO: basing this off homeScreen.mode using states would be nicer, but
     // doesn't seem to work
     function show() {
-        fuckingVisible = true
+        opacity = 1
     }
 
     function hide() {
-        fuckingVisible = false
+        opacity = 0
     }
 
-    states: [
-        State {
-            name: "visible"
-            when: fuckingVisible
-            PropertyChanges {
-                target: launcher
-                opacity: 1
-            }
-        },
-
-        State {
-            name: "invisible"
-            when: !fuckingVisible
-            PropertyChanges {
-                target: launcher
-                opacity: 0
-            }
-        }
-    ]
-
-    transitions: Transition {
+    Behavior on opacity {
         NumberAnimation {
-            properties: "opacity"
             easing.type: Easing.InOutQuad
             duration: 500
         }
