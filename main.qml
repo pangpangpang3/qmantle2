@@ -38,4 +38,7 @@ Item {
     Launcher {
         id: launcher
     }
+
+    FPSMonitor {
+    }
 }
