@@ -80,8 +80,8 @@ Item {
 
             Image {
                 id: iconItem
-                width: 240
-                height: 150
+                width: grid.cellWidth - 30
+                fillMode: Image.PreserveAspectFit
                 source: "windows/" + icon;
                 anchors.top: textItem.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
