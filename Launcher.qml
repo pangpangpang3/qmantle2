@@ -2,7 +2,6 @@ import QtQuick 2.0
 
 Item {
     id: launcher
-    state: "invisible"
     anchors.fill: parent
     opacity: 0
 
