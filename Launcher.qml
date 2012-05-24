@@ -11,7 +11,7 @@ Item {
         color: "black"
         width: 400
         height: 500
-        opacity: 0.5
+        opacity: 0.8
         anchors.fill: parent
     }
 
