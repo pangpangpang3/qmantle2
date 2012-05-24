@@ -42,7 +42,7 @@ Item {
         }
 
         function visibleOnScreen(wallpaper) {
-            console.log("x " + wallpaper.x + " width " + wallpaper.width)
+            //console.log("x " + wallpaper.x + " width " + wallpaper.width)
             if (wallpaper.x > 0 && wallpaper.x < wallpaper.width)
                 return wallpaper.width - wallpaper.x
             if (wallpaper.x > wallpaper.width)
@@ -72,11 +72,11 @@ Item {
 
         onReleased: {
             var leftDelta = visibleOnScreen(wallpaperleft)
-            console.log("left " + leftDelta)
+            //console.log("left " + leftDelta)
             var centerDelta = visibleOnScreen(wallpaper)
-            console.log("center " + centerDelta)
+            //console.log("center " + centerDelta)
             var rightDelta = visibleOnScreen(wallpaperright)
-            console.log("right " + rightDelta)
+            //console.log("right " + rightDelta)
 
             var leftWins = leftDelta > centerDelta && leftDelta > rightDelta
             var centerWins = centerDelta > rightDelta && centerDelta > leftDelta
