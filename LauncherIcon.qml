@@ -3,7 +3,7 @@ import QtQuick 2.0
 Item {
     Image {
         id: iconItem
-        source: "meego-handset-theme-darko/meegotouch/icons/" + icon;
+        source: "assets/launchericons/" + icon;
         asynchronous: true
         anchors.centerIn: parent
     }
