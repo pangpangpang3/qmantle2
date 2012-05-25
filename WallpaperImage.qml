@@ -9,6 +9,7 @@ Image {
     sourceSize.height: height
     width: parent.width
     property int initialX
+    asynchronous: true
 
     onInitialXChanged: setPosition(initialX)
 

@@ -20,6 +20,13 @@ Item {
         source: "assets/wallpapers/wallpaper.jpg"
 
         anchors.left: one.right
+
+        // we *must* load before rendering, as we're the
+        // displayed wallpaper. to not affect future load time, we reset this
+        // once we're loaded.
+        asynchronous: false
+
+        Component.onCompleted: asynchronous = true
     }
 
     WallpaperImage {
