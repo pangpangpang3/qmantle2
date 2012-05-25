@@ -44,77 +44,50 @@ Item {
                 launcher.show();
             }
 
-            Rectangle {
+            DebugControl {
                 anchors.right: switcherRect.left
-                anchors.rightMargin: 5
-                anchors.top: titleBar.top
-                anchors.bottom: titleBar.bottom
-                color: "red"
-
-                width: rotateButton.paintedWidth + 30
-
-                Text {
-                    id: rotateButton
-                    anchors.centerIn: parent
-                    text: "Rotate"
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        if (homeScreen.orientation == homeScreen.landscape) {
-                            console.log('Rotating screen to portrait')
-                            homeScreen.orientation = homeScreen.portrait
-                            var t = homeScreen.height
-                            homeScreen.height = homeScreen.width
-                            homeScreen.width = t
-                        } else if (homeScreen.orientation == homeScreen.portrait) {
-                            console.log('Rotating screen to landscape')
-                            homeScreen.orientation = homeScreen.landscape
-                            var t = homeScreen.height
-                            homeScreen.height = homeScreen.width
-                            homeScreen.width = t
-                        }
+                text: "Rotate"
+                onClicked: {
+                    if (homeScreen.orientation == homeScreen.landscape) {
+                        console.log('Rotating screen to portrait')
+                        homeScreen.orientation = homeScreen.portrait
+                        var t = homeScreen.height
+                        homeScreen.height = homeScreen.width
+                        homeScreen.width = t
+                    } else if (homeScreen.orientation == homeScreen.portrait) {
+                        console.log('Rotating screen to landscape')
+                        homeScreen.orientation = homeScreen.landscape
+                        var t = homeScreen.height
+                        homeScreen.height = homeScreen.width
+                        homeScreen.width = t
                     }
                 }
             }
 
-            Rectangle {
+            DebugControl {
                 id: switcherRect
                 anchors.right: titleBar.right
-                anchors.top: titleBar.top
-                anchors.bottom: titleBar.bottom
-                color: "red"
-                width: switcherButton.paintedWidth + 30
+                text: "Open Switcher"
 
-                Text {
-                    id: switcherButton
-                    anchors.centerIn: parent
-                    text: "Open Switcher"
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        // TODO: async loading
-                        if (!switcher) {
-                            var component = Qt.createComponent("Switcher.qml");
-                            if (component.status != Component.Ready) {
-                                console.log("FAILED LOADING COMPONENT")
-                                return
-                            }
-
-                            switcher = component.createObject(homeScreen)
+                onClicked: {
+                    // TODO: async loading
+                    if (!switcher) {
+                        var component = Qt.createComponent("Switcher.qml");
+                        if (component.status != Component.Ready) {
+                            console.log("FAILED LOADING COMPONENT")
+                            return
                         }
 
-                        switcher.showing.connect(function() {
-                            blur.radius = 32
-                        });
-                        switcher.hiding.connect(function() {
-                            blur.radius = 0
-                        });
-                        switcher.show();
+                        switcher = component.createObject(homeScreen)
                     }
+
+                    switcher.showing.connect(function() {
+                        blur.radius = 32
+                    });
+                    switcher.hiding.connect(function() {
+                        blur.radius = 0
+                    });
+                    switcher.show();
                 }
             }
         }
