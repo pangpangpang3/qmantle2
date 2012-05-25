@@ -10,21 +10,21 @@ Item {
 
     WallpaperImage {
         id: one
-        source: "12030001.jpg"
+        source: "assets/wallpapers/12030001.jpg"
 
         x: -wallpaperContainer.width
     }
 
     WallpaperImage {
         id: two
-        source: "wallpaper.jpg"
+        source: "assets/wallpapers/wallpaper.jpg"
 
         anchors.left: one.right
     }
 
     WallpaperImage {
         id: three
-        source: "12050006.jpg"
+        source: "assets/wallpapers/12050006.jpg"
 
         anchors.left: two.right
     }
