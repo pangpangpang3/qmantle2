@@ -5,7 +5,6 @@ Item {
     id: homeScreen;
     width: 960
     height: 600
-    property alias blurRadius: blur.radius
 
     property int orientation: 0
     property int landscape: 0
@@ -34,6 +33,12 @@ Item {
                     }
 
                     launcher = component.createObject(homeScreen)
+                    launcher.showing.connect(function() {
+                        blur.radius = 32
+                    });
+                    launcher.hiding.connect(function() {
+                        blur.radius = 0
+                    });
                 }
 
                 launcher.show();
@@ -102,6 +107,12 @@ Item {
                             switcher = component.createObject(homeScreen)
                         }
 
+                        switcher.showing.connect(function() {
+                            blur.radius = 32
+                        });
+                        switcher.hiding.connect(function() {
+                            blur.radius = 0
+                        });
                         switcher.show();
                     }
                 }

@@ -5,6 +5,9 @@ Item {
     anchors.fill: parent
     opacity: 0
 
+    signal showing
+    signal hiding
+
     Rectangle {
         id: wallpaper
         color: "black"
@@ -19,13 +22,13 @@ Item {
 
     function show() {
         // TODO: would be nice to have this set by a binding somehow
-        homeScreen.blurRadius = 32
         opacity = 1
+        panelBase.showing()
     }
 
     function hide() {
-        homeScreen.blurRadius = 0
         opacity = 0
+        panelBase.hiding()
     }
 
     Behavior on opacity {
