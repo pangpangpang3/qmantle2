@@ -5,19 +5,19 @@ Image {
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
-    source: "images/wmTitleBar.png";
+    source: "assets/chrome/wmTitleBar.png";
     fillMode: Image.TileHorizontally
 
     signal clicked
 
     TitleIcon {
         id: launcherUnpressed
-        source: "images/wmTaskLauncherIcon.png"
+        source: "assets/chrome/wmTaskLauncherIcon.png"
         opacity: !mouseArea.pressed
     }
 
     TitleIcon {
-        source: "images/wmTaskLauncherIconPressed.png"
+        source: "assets/chrome/wmTaskLauncherIconPressed.png"
         opacity: mouseArea.pressed
     }
 
