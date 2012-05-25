@@ -1,19 +1,6 @@
 import QtQuick 2.0
 
-Item {
-    id: launcher
-    anchors.fill: parent
-    opacity: 0
-
-    Rectangle {
-        id: wallpaper
-        color: "black"
-        width: 400
-        height: 500
-        opacity: 0.5
-        anchors.fill: parent
-    }
-
+PanelBase {
     ListModel {
         id: applicationsModel
         ListElement {
@@ -102,11 +89,6 @@ Item {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onClicked: hide()
-    }
-
     GridView {
         id: grid
         anchors.fill: parent
@@ -118,24 +100,6 @@ Item {
         delegate: LauncherIcon {
             width: grid.cellWidth
             height: grid.cellHeight
-        }
-    }
-
-    function show() {
-        // TODO: would be nice to have this set by a binding somehow
-        homeScreen.blurRadius = 32
-        opacity = 1
-    }
-
-    function hide() {
-        homeScreen.blurRadius = 0
-        opacity = 0
-    }
-
-    Behavior on opacity {
-        NumberAnimation {
-            easing.type: Easing.InOutQuad
-            duration: 500
         }
     }
 }

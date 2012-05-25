@@ -1,17 +1,6 @@
 import QtQuick 2.0
 
-Item {
-    id: switcher
-    anchors.fill: parent
-    opacity: 0
-
-    Rectangle {
-        id: wallpaper
-        color: "black"
-        opacity: 0.5
-        anchors.fill: parent
-    }
-
+PanelBase {
     ListModel {
         id: windowModel
         ListElement {
@@ -51,11 +40,6 @@ Item {
             name: "Messages - Facebook"
             icon: "Nokia-N9-N950-MeeGo-OS-review-huge-Part-2-9.png"
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: hide()
     }
 
     GridView {
@@ -114,8 +98,8 @@ Item {
             width = owidth = item.width
 
             isOpen = true
-            width = switcher.width
-            height = switcher.height
+            width = panelBase.width
+            height = panelBase.height
             opacity = 1
         }
 
@@ -152,24 +136,6 @@ Item {
                 easing.type: Easing.InOutQuad
                 duration: 400
             }
-        }
-    }
-
-    function show() {
-        // TODO: would be nice to have this set by a binding somehow
-        homeScreen.blurRadius = 32
-        opacity = 1
-    }
-
-    function hide() {
-        homeScreen.blurRadius = 0
-        opacity = 0
-    }
-
-    Behavior on opacity {
-        NumberAnimation {
-            easing.type: Easing.InOutQuad
-            duration: 500
         }
     }
 }
