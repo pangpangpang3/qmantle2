@@ -112,7 +112,7 @@ Item {
         anchors.fill: parent
         anchors.margins: 50
         anchors.topMargin: 70 // XXX: FIXME: hardcoded, should be toolbar height
-        cellHeight: width / 7
+        cellHeight: homeScreen.orientation == landscape ? width / 7 : width / 4
         cellWidth: cellHeight
         model: applicationsModel
         delegate: Item {
