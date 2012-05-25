@@ -11,6 +11,9 @@ Item {
     property int landscape: 0
     property int portrait: 90
 
+    property var launcher
+    property var switcher
+
     Item {
         id: blurrable
         anchors.fill: parent
@@ -22,6 +25,17 @@ Item {
             id: titleBar
 
             onClicked: {
+                // TODO: async loading
+                if (!launcher) {
+                    var component = Qt.createComponent("Launcher.qml");
+                    if (component.status != Component.Ready) {
+                        console.log("FAILED LOADING COMPONENT")
+                        return
+                    }
+
+                    launcher = component.createObject(homeScreen)
+                }
+
                 launcher.show();
             }
 
@@ -76,7 +90,20 @@ Item {
 
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: switcher.show()
+                    onClicked: {
+                        // TODO: async loading
+                        if (!switcher) {
+                            var component = Qt.createComponent("Switcher.qml");
+                            if (component.status != Component.Ready) {
+                                console.log("FAILED LOADING COMPONENT")
+                                return
+                            }
+
+                            switcher = component.createObject(homeScreen)
+                        }
+
+                        switcher.show();
+                    }
                 }
             }
         }
@@ -93,14 +120,6 @@ Item {
                 duration: 500
             }
         }
-    }
-
-    Switcher {
-        id: switcher
-    }
-
-    Launcher {
-        id: launcher
     }
 
     FPSMonitor {
