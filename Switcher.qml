@@ -1,6 +1,9 @@
 import QtQuick 2.0
 
 PanelBase {
+    id: switcher
+    property var window
+
     ListModel {
         id: windowModel
         ListElement {
@@ -77,64 +80,17 @@ PanelBase {
                 anchors.right: iconItem.width > textItem.width ? iconItem.right : textItem.right
                 anchors.left: iconItem.x < textItem.x ? iconItem.left : textItem.left
                 onClicked: {
-                    viewer.show(iconItem)
+                    if (!switcher.window) {
+                        var component = Qt.createComponent("Window.qml");
+                        if (component.status != Component.Ready) {
+                            console.log("FAILED LOADING COMPONENT")
+                            return
+                        }
+
+                        switcher.window = component.createObject(switcher)
+                    }
+                    switcher.window.show(iconItem)
                 }
-            }
-        }
-    }
-
-    Image {
-        id: viewer
-        property bool isOpen: false
-        property int oheight
-        property int owidth
-        anchors.centerIn: parent
-        visible: width != owidth
-
-        function show(item) {
-            source = item.source
-
-            height = oheight = item.height
-            width = owidth = item.width
-
-            isOpen = true
-            width = panelBase.width
-            height = panelBase.height
-            opacity = 1
-        }
-
-        function close() {
-            height = oheight
-            width = owidth
-            opacity = 0
-            isOpen = false
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            enabled: parent.isOpen
-            onClicked: parent.close()
-        }
-
-        Behavior on height {
-            enabled: viewer.isOpen
-            NumberAnimation {
-                easing.type: Easing.InOutQuad
-                duration: 500
-            }
-        }
-        Behavior on width {
-            enabled: viewer.isOpen
-            NumberAnimation {
-                easing.type: Easing.InOutQuad
-                duration: 500
-            }
-        }
-        Behavior on opacity {
-            enabled: viewer.isOpen
-            NumberAnimation {
-                easing.type: Easing.InOutQuad
-                duration: 400
             }
         }
     }
