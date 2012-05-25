@@ -122,7 +122,7 @@ Item {
             Image {
                 id: iconItem
                 source: "meego-handset-theme-darko/meegotouch/icons/" + icon;
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.centerIn: parent
             }
             Text {
                 id: textItem
