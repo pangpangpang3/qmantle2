@@ -7,6 +7,7 @@ Item {
     property var leftMost: one
     property var center: two
     property var rightMost: three
+    onWidthChanged: leftMost.setPosition(-wallpaperContainer.width)
 
     WallpaperImage {
         id: one
