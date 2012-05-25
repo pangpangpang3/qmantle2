@@ -11,10 +11,6 @@ Item {
     property int landscape: 0
     property int portrait: 90
 
-    function toggleModeChange() {
-        launcher.show();
-    }
-
     Item {
         id: blurrable
         anchors.fill: parent
@@ -24,6 +20,10 @@ Item {
 
         TitleBar {
             id: titleBar
+
+            onClicked: {
+                launcher.show();
+            }
 
             Rectangle {
                 anchors.right: switcherRect.left

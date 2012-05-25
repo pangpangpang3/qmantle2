@@ -1,11 +1,14 @@
 import QtQuick 2.0
 
 Image {
+    id: titleBar
     anchors.top: parent.top
     anchors.left: parent.left
     anchors.right: parent.right
     source: "images/wmTitleBar.png";
     fillMode: Image.TileHorizontally
+
+    signal clicked
 
     TitleIcon {
         id: launcherUnpressed
@@ -42,9 +45,7 @@ Image {
         id: mouseArea
         anchors.fill: launcherUnpressed
 
-        onClicked: {
-            homeScreen.toggleModeChange();
-        }
+        onClicked: titleBar.clicked()
     }
 }
 
