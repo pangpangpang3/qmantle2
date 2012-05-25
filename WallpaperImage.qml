@@ -10,6 +10,7 @@ Image {
     width: parent.width
     property int initialX
     asynchronous: true
+    fillMode: homeScreen.orientation == homeScreen.landscape ? Image.Stretch : Image.PreserveAspectCrop
 
     onInitialXChanged: setPosition(initialX)
 
