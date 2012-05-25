@@ -69,7 +69,7 @@ PanelBase {
                 id: iconItem
                 width: grid.cellWidth - 30
                 fillMode: Image.PreserveAspectFit
-                source: "windows/" + icon;
+                source: "assets/windows/" + icon;
                 anchors.top: textItem.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
             }
