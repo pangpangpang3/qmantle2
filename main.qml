@@ -45,6 +45,15 @@ Item {
             }
 
             DebugControl {
+                anchors.right: rotateDebug.left
+                text: "FPS"
+                onClicked: {
+                    fpsMonitor.toggle()
+                }
+            }
+
+            DebugControl {
+                id: rotateDebug
                 anchors.right: switcherRect.left
                 text: "Rotate"
                 onClicked: {
@@ -107,5 +116,6 @@ Item {
     }
 
     FPSMonitor {
+        id: fpsMonitor
     }
 }
