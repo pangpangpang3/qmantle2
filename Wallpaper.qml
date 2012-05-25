@@ -12,7 +12,7 @@ Item {
         id: one
         source: "assets/wallpapers/12030001.jpg"
 
-        x: -wallpaperContainer.width
+        initialX: -wallpaperContainer.width
     }
 
     WallpaperImage {

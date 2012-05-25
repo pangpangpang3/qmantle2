@@ -8,6 +8,9 @@ Image {
     sourceSize.width: width
     sourceSize.height: height
     width: parent.width
+    property int initialX
+
+    onInitialXChanged: setPosition(initialX)
 
     function setPosition(newX) {
         wallpaperBehavior.enabled = false;
