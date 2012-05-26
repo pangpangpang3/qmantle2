@@ -27,7 +27,7 @@ Item {
         id: blurrable
         anchors.fill: parent
 
-        Wallpaper {
+        WallpaperController {
         }
 
         TitleBar {
