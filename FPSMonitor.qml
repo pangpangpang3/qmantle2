@@ -39,6 +39,8 @@ Text {
         from: 0
         to: 100
         loops: Animation.Infinite
+
+        Component.onCompleted: stop()
     }
 
     onTChanged: {
