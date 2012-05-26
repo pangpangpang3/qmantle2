@@ -14,6 +14,18 @@ Item {
         onTriggered: performLayout()
     }
 
+    // XXX: this is really really crap. we have too much pixel maths going on,
+    // which breaks really really easily in 1) the case of forgotten rounding
+    // (already happened) or 2) the case of rotations causing fractional amounts
+    // (which is also happening).
+    //
+    // a much much more robust design is possible; because we know the desired
+    // widths of widgets: simply assign a 'grid' of taken positions (where taken
+    // means filled with a widget), and on layout, walk each child, finding a
+    // place in the grid where it'll fit (e.g. if it needs 2x1, look for a 2x1
+    // shaped hole...) marking the grid as filled as we progress.
+    //
+    // we can also then reuse this grid for saving of positioning, one day.
     function performLayout() {
         var itemsPlaced = 0
         var currentX = 0
