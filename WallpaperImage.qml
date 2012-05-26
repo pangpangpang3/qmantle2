@@ -1,16 +1,18 @@
 import QtQuick 2.0
 
+import "constants.js" as Constants
+
 Image {
     id: wallpaper
     property var behavior: wallpaperBehavior
     anchors.top: parent.top
     anchors.bottom: parent.bottom
-    sourceSize.width: width
-    sourceSize.height: height
+    sourceSize.width: Constants.screen.width
+    sourceSize.height: Constants.screen.height
     width: parent.width
     property int initialX
     asynchronous: true
-    fillMode: homeScreen.orientation == homeScreen.landscape ? Image.Stretch : Image.PreserveAspectCrop
+    fillMode: Image.PreserveAspectCrop
 
     onInitialXChanged: setPosition(initialX)
 

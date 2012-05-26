@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "constants.js" as Constants
+
 PanelBase {
     id: switcher
     property var window
@@ -50,7 +52,7 @@ PanelBase {
         anchors.fill: parent
         anchors.margins: 50
         anchors.topMargin: 70 // XXX: FIXME: hardcoded, should be toolbar height
-        cellHeight: width / 3
+        cellHeight: homeScreen.orientation == Constants.landscape ? width / 3 : width / 2
         cellWidth: cellHeight
         model: windowModel
         delegate: Item {

@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "constants.js" as Constants
+
 PanelBase {
     ListModel {
         id: applicationsModel
@@ -94,7 +96,7 @@ PanelBase {
         anchors.fill: parent
         anchors.margins: 50
         anchors.topMargin: 70 // XXX: FIXME: hardcoded, should be toolbar height
-        cellHeight: homeScreen.orientation == landscape ? width / 7 : width / 4
+        cellHeight: homeScreen.orientation == Constants.landscape ? width / 7 : width / 4
         cellWidth: cellHeight
         model: applicationsModel
         delegate: LauncherIcon {
