@@ -31,12 +31,11 @@ Image {
     }
 
     // widgets
-    Grid {
+    WidgetLayout {
         anchors.fill: parent
         anchors.topMargin: homeScreen.titleBar.height
-        columns: width / widgetone.width
 
-        Widget1x1 {
+        Widget2x1 {
             id: widgetone
             LauncherIcon {
                 anchors.fill: parent
@@ -58,14 +57,14 @@ Image {
                 iconId: "icon-l-contacts.png"
             }
         }
-        Widget1x1 {
+        Widget2x1 {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
                 iconId: "icon-l-notes.png"
             }
         }
-        Widget1x1 {
+        Widget2x1 {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Phone"
