@@ -3,8 +3,18 @@ import QtQuick 2.0
 import "constants.js" as Constants
 
 Item {
-    width: homeScreen.orientation == Constants.landscape ? homeScreen.width / 6 : homeScreen.width / 3
-    height: width
+    width: {
+        if (homeScreen.orientation == Constants.landscape)
+           return homeScreen.width / 4
+        else
+           return homeScreen.width / 3
+   }
+    height: {
+        if (homeScreen.orientation == Constants.landscape)
+            return (homeScreen.height - homeScreen.titleBar.height) / 3
+        else
+            return (homeScreen.height - homeScreen.titleBar.height) / 4
+    }
 
     Rectangle {
         anchors.fill: parent
