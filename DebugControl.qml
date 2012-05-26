@@ -1,12 +1,12 @@
 import QtQuick 2.0
 
 Rectangle {
-    anchors.rightMargin: 5
-    anchors.top: titleBar.top
-    anchors.bottom: titleBar.bottom
     color: "red"
 
-    width: myButton.paintedWidth + 30
+    width: myButton.paintedWidth * 3
+    height: myButton.paintedHeight * 5
+    anchors.leftMargin: 10
+    anchors.top: parent.top
 
     property alias text: myButton.text
     signal clicked

@@ -46,21 +46,32 @@ Item {
                 });
             }
 
-            DebugControl {
-                id: switcherRect
+            Rectangle {
+                color: "red"
                 anchors.right: titleBar.right
-                text: "Open Switcher"
+                anchors.top: titleBar.top
+                anchors.bottom: titleBar.bottom
+                width: switcherOpenText.paintedWidth
 
-                onClicked: {
-                    Constants.loadSingleton("Switcher.qml", homeScreen, function(switcher) {
-                        switcher.showing.connect(function() {
-                            blur.radius = 32
+                Text {
+                    id: switcherOpenText
+                    text: "Open Switcher"
+                    anchors.centerIn: parent
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        Constants.loadSingleton("Switcher.qml", homeScreen, function(switcher) {
+                            switcher.showing.connect(function() {
+                                blur.radius = 32
+                            });
+                            switcher.hiding.connect(function() {
+                                blur.radius = 0
+                            });
+                            switcher.show();
                         });
-                        switcher.hiding.connect(function() {
-                            blur.radius = 0
-                        });
-                        switcher.show();
-                    });
+                    }
                 }
             }
         }
