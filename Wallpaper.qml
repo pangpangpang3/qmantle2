@@ -120,15 +120,7 @@ Item {
             anchors.fill: parent
             anchors.topMargin: homeScreen.titleBar.height
             columns: width / widgetone.width
-/*
-            move: Transition {
-                NumberAnimation {
-                    properties: "x, y"
-                    easing.type: Easing.OutExpo
-                    duration: 300
-                }
-            }
-*/
+
             Widget1x1 {
                 id: widgetone
                 LauncherIcon {
