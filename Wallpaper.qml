@@ -41,7 +41,7 @@ Item {
         anchors.fill: parent
 
         onPressed: {
-            wallpaperContainer.pressX = mouse.x
+            wallpaperContainer.pressX = mouseX
         }
 
         function findLowest(objArr) {
@@ -102,8 +102,8 @@ Item {
         }
 
         onPositionChanged: {
-            leftMost.setPosition(leftMost.x - (wallpaperContainer.pressX - mouse.x))
-            wallpaperContainer.pressX = mouse.x
+            leftMost.setPosition(leftMost.x - (wallpaperContainer.pressX - mouseX))
+            wallpaperContainer.pressX = mouseX
 
             if (leftMost.x >= 0) {
                 swapRight()
