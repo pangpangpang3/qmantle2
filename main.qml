@@ -4,11 +4,12 @@ import QtGraphicalEffects 1.0
 import "constants.js" as Constants
 
 // for testing homeScreen rotation animations
-Item {
-    height: 1050
-    width: 1680
+//Item {
+//    height: 1050
+//    width: 1680
 
-    x: 400
+//    x: 400
+
 Item {
     id: homeScreen;
     width: Constants.screen.width
@@ -176,4 +177,4 @@ Item {
     }
 }
 
-}
+//}
