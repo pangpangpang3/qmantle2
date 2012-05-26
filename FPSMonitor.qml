@@ -49,7 +49,6 @@ Text {
     }
 
     text: "Frame rate: " + fpsTimer.fps + " Hz"
-    color: "white"
     anchors.right: parent.right
     anchors.bottom: parent.bottom
 }

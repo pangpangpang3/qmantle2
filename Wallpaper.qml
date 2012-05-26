@@ -9,34 +9,6 @@ Item {
     property var rightMost: three
     onWidthChanged: leftMost.setPosition(-wallpaperContainer.width)
 
-    WallpaperImage {
-        id: one
-        source: "assets/wallpapers/12030001.jpg"
-
-        initialX: -wallpaperContainer.width
-    }
-
-    WallpaperImage {
-        id: two
-        source: "assets/wallpapers/wallpaper.jpg"
-
-        anchors.left: one.right
-
-        // we *must* load before rendering, as we're the
-        // displayed wallpaper. to not affect future load time, we reset this
-        // once we're loaded.
-        asynchronous: false
-
-        Component.onCompleted: asynchronous = true
-    }
-
-    WallpaperImage {
-        id: three
-        source: "assets/wallpapers/12050006.jpg"
-
-        anchors.left: two.right
-    }
-
     MouseArea {
         anchors.fill: parent
 
@@ -121,6 +93,171 @@ Item {
             }
             leftMost.x = -wallpaperContainer.width
         }
+    }
+
+    WallpaperImage {
+        id: one
+        source: "assets/wallpapers/12030001.jpg"
+
+        initialX: -wallpaperContainer.width
+    }
+
+    WallpaperImage {
+        id: two
+        source: "assets/wallpapers/wallpaper.jpg"
+
+        anchors.left: one.right
+
+        // we *must* load before rendering, as we're the
+        // displayed wallpaper. to not affect future load time, we reset this
+        // once we're loaded.
+        asynchronous: false
+
+        Component.onCompleted: asynchronous = true
+
+
+        Flow {
+            anchors.fill: parent
+            anchors.topMargin: homeScreen.titleBar.height
+/*
+            move: Transition {
+                NumberAnimation {
+                    properties: "x, y"
+                    easing.type: Easing.OutExpo
+                    duration: 300
+                }
+            }
+*/
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Phone"
+                    iconId: "icon-l-telephony.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Mail"
+                    iconId: "icon-l-mail.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Contacts"
+                    iconId: "icon-l-contacts.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Notes"
+                    iconId: "icon-l-notes.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Phone"
+                    iconId: "icon-l-telephony.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Mail"
+                    iconId: "icon-l-mail.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Contacts"
+                    iconId: "icon-l-contacts.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Notes"
+                    iconId: "icon-l-notes.png"
+                }
+            }
+
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Phone"
+                    iconId: "icon-l-telephony.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Mail"
+                    iconId: "icon-l-mail.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Contacts"
+                    iconId: "icon-l-contacts.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Notes"
+                    iconId: "icon-l-notes.png"
+                }
+            }
+
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Phone"
+                    iconId: "icon-l-telephony.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Mail"
+                    iconId: "icon-l-mail.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Contacts"
+                    iconId: "icon-l-contacts.png"
+                }
+            }
+            Widget1x1 {
+                LauncherIcon {
+                    anchors.fill: parent
+                    title: "Notes"
+                    iconId: "icon-l-notes.png"
+                }
+            }
+
+
+
+
+
+
+
+        }
+
+    }
+
+    WallpaperImage {
+        id: three
+        source: "assets/wallpapers/12050006.jpg"
+
+        anchors.left: two.right
     }
 }
 

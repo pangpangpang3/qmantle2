@@ -102,6 +102,8 @@ PanelBase {
         delegate: LauncherIcon {
             width: grid.cellWidth
             height: grid.cellHeight
+            title: name
+            iconId: icon
         }
     }
 }

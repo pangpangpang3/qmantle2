@@ -1,16 +1,17 @@
 import QtQuick 2.0
 
 Item {
+    property alias title: textItem.text
+    property string iconId
     Image {
         id: iconItem
-        source: "assets/launchericons/" + icon;
+        source: "assets/launchericons/" + parent.iconId;
         asynchronous: true
         anchors.centerIn: parent
     }
 
     Text {
         id: textItem
-        text: name;
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: iconItem.bottom
         color: "white"
@@ -22,7 +23,7 @@ Item {
         anchors.right: iconItem.width > textItem.width ? iconItem.right : textItem.right
         anchors.left: iconItem.x < textItem.x ? iconItem.left : textItem.left
         onClicked: {
-            console.log("Clicked on " + name)
+            console.log("Clicked on " + parent.title)
         }
     }
 }
