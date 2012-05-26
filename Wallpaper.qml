@@ -116,9 +116,10 @@ Item {
         Component.onCompleted: asynchronous = true
 
 
-        Flow {
+        Grid {
             anchors.fill: parent
             anchors.topMargin: homeScreen.titleBar.height
+            columns: width / widgetone.width
 /*
             move: Transition {
                 NumberAnimation {
@@ -129,6 +130,7 @@ Item {
             }
 */
             Widget1x1 {
+                id: widgetone
                 LauncherIcon {
                     anchors.fill: parent
                     title: "Phone"
