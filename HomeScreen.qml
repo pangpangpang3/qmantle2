@@ -11,8 +11,6 @@ Item {
 
     property alias titleBar: titleBar
     property int orientation: Constants.landscape
-    property var launcher
-    property var switcher
 
     // hack: we can't reset rotation to Constants.landscape, because the
     // transition will go the wrong way. this will have the same effect, but not
@@ -36,24 +34,16 @@ Item {
             id: titleBar
 
             onClicked: {
-                // TODO: async loading
-                if (!homeScreen.launcher) {
-                    var component = Qt.createComponent("Launcher.qml");
-                    if (component.status != Component.Ready) {
-                        console.log("FAILED LOADING COMPONENT")
-                        return
-                    }
-
-                    homeScreen.launcher = component.createObject(homeScreen)
-                    homeScreen.launcher.showing.connect(function() {
+                Constants.loadSingleton("Launcher.qml", homeScreen, function(launcher) {
+                    launcher.showing.connect(function() {
                         blur.radius = 32
                     });
-                    homeScreen.launcher.hiding.connect(function() {
+                    launcher.hiding.connect(function() {
                         blur.radius = 0
                     });
-                }
 
-                homeScreen.launcher.show();
+                    launcher.show();
+                });
             }
 
             DebugControl {
@@ -62,24 +52,15 @@ Item {
                 text: "Open Switcher"
 
                 onClicked: {
-                    // TODO: async loading
-                    if (!homeScreen.switcher) {
-                        var component = Qt.createComponent("Switcher.qml");
-                        if (component.status != Component.Ready) {
-                            console.log("FAILED LOADING COMPONENT")
-                            return
-                        }
-
-                        homeScreen.switcher = component.createObject(homeScreen)
-                    }
-
-                    homeScreen.switcher.showing.connect(function() {
-                        blur.radius = 32
+                    Constants.loadSingleton("Switcher.qml", homeScreen, function(switcher) {
+                        switcher.showing.connect(function() {
+                            blur.radius = 32
+                        });
+                        switcher.hiding.connect(function() {
+                            blur.radius = 0
+                        });
+                        switcher.show();
                     });
-                    homeScreen.switcher.hiding.connect(function() {
-                        blur.radius = 0
-                    });
-                    homeScreen.switcher.show();
                 }
             }
         }
