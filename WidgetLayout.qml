@@ -70,26 +70,29 @@ Item {
                             [ 0, 0, 0 ] ]
         }
 
-        printGrid(grid)
-
         console.log("DOING LAYOUT FOR " + layout.children.length + " ITEMS")
 
         for (var i = 0; i < layout.children.length; ++i) {
             var obj = layout.children[i]
 
             console.log("Trying to find a space in the grid for object of size " + obj.requiredXCells + "x" + obj.requiredYCells)
+            printGrid(grid)
 
             var currentY = 0
             var positioned = false
 
             for (; !positioned && currentY < grid.length; currentY++) {
+                if (currentY + obj.requiredYCells > grid.length)
+                    break
                 for (var currentX = 0; !positioned && currentX < grid[currentY].length; currentX++) {
+                    if (currentX + obj.requiredXCells > grid[currentY].length)
+                        break
                     if (!grid[currentY][currentX]) {
                         var taken = false
                         var checkY = currentY
 
-                        for (; !taken && checkY < grid.length; checkY++) {
-                            for (var checkX = currentX; !taken && checkX < grid[checkY].length; checkX++) {
+                        for (; !taken && checkY < currentY + obj.requiredYCells; checkY++) {
+                            for (var checkX = currentX; !taken && checkX < currentX + obj.requiredXCells; checkX++) {
                                 if (grid[checkY][checkX]) {
                                     console.log("Taken at " + checkX + "x" + checkY)
                                     taken = true
@@ -99,7 +102,7 @@ Item {
                         }
 
                         if (!taken) {
-                            console.log("Positioning at " + currentX + "x" + currentY)
+                            console.log("Positioning at " + currentX + "x" + currentY + " to " + (currentX + obj.requiredXCells) + "x" + (currentY + obj.requiredYCells))
                             positioned = obj.visible = true
                             var checkY = currentY
 

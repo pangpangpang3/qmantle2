@@ -36,7 +36,7 @@ Image {
         anchors.topMargin: homeScreen.titleBar.height
 
         Widget {
-            requiredYCells: 2
+            requiredXCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "blue"
@@ -112,6 +112,7 @@ Image {
             }
         }
         Widget {
+            requiredYCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "black"
@@ -124,42 +125,29 @@ Image {
             }
         }
         Widget {
+            Rectangle {
+                anchors.fill: parent
+                color: "black"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
                 iconId: "icon-l-notes.png"
             }
         }
-
         Widget {
-            LauncherIcon {
+            Rectangle {
                 anchors.fill: parent
-                title: "Phone"
-                iconId: "icon-l-telephony.png"
+                color: "green"
+                opacity: 0.5
             }
-        }
-        Widget {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Mail"
-                iconId: "icon-l-mail.png"
-            }
-        }
-        Widget {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Contacts"
-                iconId: "icon-l-contacts.png"
-            }
-        }
-        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
                 iconId: "icon-l-notes.png"
             }
         }
-
     }
 }
 
