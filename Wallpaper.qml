@@ -139,7 +139,7 @@ Image {
         Widget {
             Rectangle {
                 anchors.fill: parent
-                color: "green"
+                color: "gray"
                 opacity: 0.5
             }
             LauncherIcon {

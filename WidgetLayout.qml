@@ -62,7 +62,7 @@ Item {
             grid = [ [ 0, 0, 0 ],
                      [ 0, 0, 0 ],
                      [ 0, 0, 0 ],
-                            [ 0, 0, 0 ] ]
+                     [ 0, 0, 0 ] ]
         }
 
         console.log("DOING LAYOUT FOR " + layout.children.length + " ITEMS")
