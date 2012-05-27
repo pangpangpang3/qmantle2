@@ -1,7 +1,11 @@
 import QtQuick 2.0
 
+import "constants.js" as Constants
+
 Item {
     id: layout
+
+    property bool ready: false
     onChildrenChanged: relayout.restart()
     onWidthChanged: relayout.restart()
     onHeightChanged: relayout.restart()
@@ -14,59 +18,128 @@ Item {
         onTriggered: performLayout()
     }
 
-    // XXX: this is really really crap. we have too much pixel maths going on,
-    // which breaks really really easily in 1) the case of forgotten rounding
-    // (already happened) or 2) the case of rotations causing fractional amounts
-    // (which is also happening).
-    //
-    // a much much more robust design is possible; because we know the desired
-    // widths of widgets: simply assign a 'grid' of taken positions (where taken
-    // means filled with a widget), and on layout, walk each child, finding a
-    // place in the grid where it'll fit (e.g. if it needs 2x1, look for a 2x1
-    // shaped hole...) marking the grid as filled as we progress.
-    //
-    // we should furthermore strive to use anchors to position items instead of
+    Component.onCompleted: {
+        ready = true
+        relayout.restart()
+    }
+
+    function emptyLandscapeGrid() {
+        return [ [ 0, 0, 0, 0 ],
+                 [ 0, 0, 0, 0 ],
+                 [ 0, 0, 0, 0 ] ]
+    }
+
+    function emptyPortraitGrid() {
+        return [ [ 0, 0, 0 ],
+                 [ 0, 0, 0 ],
+                 [ 0, 0, 0 ],
+                 [ 0, 0, 0 ] ]
+    }
+
+    function printGrid(grid) {
+        var currentY = 0
+        var str = "   | "
+        for (var i = 0; i < grid[0].length; ++i) {
+            str += i + " || "
+        }
+        str += "\n"
+        for (; currentY < grid.length; currentY++) {
+            str += currentY + ": "
+            for (var currentX = 0; currentX < grid[currentY].length; currentX++) {
+                if (grid[currentY][currentX])
+                    str += "[ x ]"
+                else
+                    str += "[   ]"
+            }
+
+            str += "\n"
+        }
+
+        console.log(str)
+    }
+
+    // XXX: we should furthermore strive to use anchors to position items instead of
     // fixing their positions. anchor the top left item to our container, anchor
     // all subsequent widgets to it.
     //
     // we can also then reuse this grid for saving of positioning, one day.
     function performLayout() {
-        var itemsPlaced = 0
-        var currentX = 0
-        var currentY = 0
-        var rowMaxY = 0 // highest item in this row
+        if (!layout.ready) {
+            // if the pristine grid isn't setup, then the component isn't loaded
+            // yet.
+            console.log("Not ready yet")
+            return;
+        }
+
+        var grid
+        if (homeScreen.orientation == Constants.landscape) {
+            console.log("Landscape grid")
+            grid = emptyLandscapeGrid()
+        } else {
+            grid = emptyPortraitGrid()
+        }
+
+        printGrid(grid)
 
         console.log("DOING LAYOUT FOR " + layout.children.length + " ITEMS")
 
         for (var i = 0; i < layout.children.length; ++i) {
-            // 1x1 = 186x186
-            // 2x1 = 385x186
-            // 1x2 = 186x385
             var obj = layout.children[i]
 
-            if (obj.width + currentX > layout.width) {
-                console.log("too big, currentX " + currentX + " width " + obj.width + " my width " + layout.width)
-                // move to next row
-                currentX = 0
-                currentY = currentY + rowMaxY
-                rowMaxY = 0
-                itemsPlaced = 0
-                console.log("Next row at " + currentY)
+            console.log("Trying to find a space in the grid for object of size " + obj.requiredXCells + "x" + obj.requiredYCells)
+
+            var currentY = 0
+            var positioned = false
+
+            for (; !positioned && currentY < grid.length; currentY++) {
+                for (var currentX = 0; !positioned && currentX < grid[currentY].length; currentX++) {
+                    if (!grid[currentY][currentX]) {
+                        var taken = false
+                        var checkY = currentY
+
+                        for (; !taken && checkY < grid.length; checkY++) {
+                            for (var checkX = currentX; !taken && checkX < grid[checkY].length; checkX++) {
+                                if (grid[checkY][checkX]) {
+                                    console.log("Taken at " + checkX + "x" + checkY)
+                                    taken = true
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!taken) {
+                            console.log("Positioning at " + currentX + "x" + currentY)
+                            positioned = obj.visible = true
+                            var checkY = currentY
+
+                            // TODO: replace with anchors
+                            obj.x = currentX * widgetBase.baseWidth
+                            obj.y = currentY * widgetBase.baseHeight
+                            for (; checkY < currentY + obj.requiredYCells; ++checkY) {
+                                for (var checkX = currentX; checkX < currentX + obj.requiredXCells; ++checkX) {
+                                    // place it
+                                    grid[checkY][checkX] = obj
+                                }
+                            }
+
+                            printGrid(grid)
+                        }
+                    }
+                }
             }
 
-            if (obj.height > rowMaxY) {
-                console.log("rowMaxY is " + obj.height)
-                rowMaxY = obj.height
+            if (!positioned) {
+                console.log("SHIT, object of " + obj.requiredXCells + " won't fit in the available space")
+                obj.visible = false
             }
-
-            console.log("Laying out an item size: " + obj.width + "x" + obj.height + " at " + currentX + "x" + currentY)
-            obj.x = currentX
-            obj.y = currentY
-            itemsPlaced++
-            currentX += obj.width
-            console.log("currentX is at " + currentX)
         }
 
         console.log("LAYOUT DONE")
+    }
+
+    // TODO: replace with anchors
+    WidgetBase {
+        id: widgetBase
+        visible: false
     }
 }
