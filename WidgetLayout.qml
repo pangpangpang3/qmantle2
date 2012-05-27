@@ -135,7 +135,7 @@ Item {
                             if (currentY == 0) {
                                 obj.anchors.top = layout.top
                             } else {
-                                for (checkY = currentY - 1; ; currentY--) {
+                                for (checkY = currentY - 1; ; checkY--) {
                                     if (checkY < 0) {
                                         console.log("CANNOT CREATE LEFT ANCHOR")
                                         break;
