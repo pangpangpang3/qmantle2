@@ -52,9 +52,8 @@ Item {
     // we can also then reuse this grid for saving of positioning, one day.
     function performLayout() {
         if (!layout.ready) {
-            // if the pristine grid isn't setup, then the component isn't loaded
-            // yet.
-            console.log("Not ready yet")
+            // we mustn't do any layout before fully loaded, otherwise we're
+            // just wasting our time.
             return;
         }
 
