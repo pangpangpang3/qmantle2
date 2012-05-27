@@ -23,19 +23,6 @@ Item {
         relayout.restart()
     }
 
-    function emptyLandscapeGrid() {
-        return [ [ 0, 0, 0, 0 ],
-                 [ 0, 0, 0, 0 ],
-                 [ 0, 0, 0, 0 ] ]
-    }
-
-    function emptyPortraitGrid() {
-        return [ [ 0, 0, 0 ],
-                 [ 0, 0, 0 ],
-                 [ 0, 0, 0 ],
-                 [ 0, 0, 0 ] ]
-    }
-
     function printGrid(grid) {
         var currentY = 0
         var str = "   | "
@@ -74,9 +61,14 @@ Item {
         var grid
         if (homeScreen.orientation == Constants.landscape) {
             console.log("Landscape grid")
-            grid = emptyLandscapeGrid()
+            grid = [ [ 0, 0, 0, 0 ],
+                     [ 0, 0, 0, 0 ],
+                     [ 0, 0, 0, 0 ] ]
         } else {
-            grid = emptyPortraitGrid()
+            grid = [ [ 0, 0, 0 ],
+                     [ 0, 0, 0 ],
+                     [ 0, 0, 0 ],
+                            [ 0, 0, 0 ] ]
         }
 
         printGrid(grid)
@@ -129,7 +121,7 @@ Item {
             }
 
             if (!positioned) {
-                console.log("SHIT, object of " + obj.requiredXCells + " won't fit in the available space")
+                console.log("object of " + obj.requiredXCells + "x" + obj.requiredYCells + " won't fit in the available space")
                 obj.visible = false
             }
         }
