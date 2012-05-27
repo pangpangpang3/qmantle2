@@ -45,11 +45,6 @@ Item {
         console.log(str)
     }
 
-    // XXX: we should furthermore strive to use anchors to position items instead of
-    // fixing their positions. anchor the top left item to our container, anchor
-    // all subsequent widgets to it.
-    //
-    // we can also then reuse this grid for saving of positioning, one day.
     function performLayout() {
         if (!layout.ready) {
             // we mustn't do any layout before fully loaded, otherwise we're
@@ -74,6 +69,11 @@ Item {
 
         for (var i = 0; i < layout.children.length; ++i) {
             var obj = layout.children[i]
+
+            obj.anchors.top = undefined
+            obj.anchors.bottom = undefined
+            obj.anchors.left = undefined
+            obj.anchors.right = undefined
 
             console.log("Trying to find a space in the grid for object of size " + obj.requiredXCells + "x" + obj.requiredYCells)
             printGrid(grid)
@@ -106,13 +106,45 @@ Item {
                             positioned = obj.visible = true
                             var checkY = currentY
 
-                            // TODO: replace with anchors
-                            obj.x = currentX * widgetBase.baseWidth
-                            obj.y = currentY * widgetBase.baseHeight
                             for (; checkY < currentY + obj.requiredYCells; ++checkY) {
                                 for (var checkX = currentX; checkX < currentX + obj.requiredXCells; ++checkX) {
                                     // place it
                                     grid[checkY][checkX] = obj
+                                }
+                            }
+
+                            // anchor it
+                            // TODO: we should delay anchoring until the grid is
+                            // setup, perhaps
+                            if (currentX == 0) {
+                                obj.anchors.left = layout.left
+                            } else {
+                                for (var checkX = currentX - 1; ; checkX--) {
+                                    if (checkX < 0) {
+                                        console.log("CANNOT CREATE LEFT ANCHOR")
+                                        break
+                                    }
+
+                                    if (grid[currentY][checkX]) {
+                                        obj.anchors.left = grid[currentY][checkX].right
+                                        break
+                                    }
+                                }
+                            }
+
+                            if (currentY == 0) {
+                                obj.anchors.top = layout.top
+                            } else {
+                                for (checkY = currentY - 1; ; currentY--) {
+                                    if (checkY < 0) {
+                                        console.log("CANNOT CREATE LEFT ANCHOR")
+                                        break;
+                                    }
+
+                                    if (grid[checkY][currentX]) {
+                                        obj.anchors.top = grid[checkY][currentX].bottom
+                                        break
+                                    }
                                 }
                             }
 
@@ -129,11 +161,5 @@ Item {
         }
 
         console.log("LAYOUT DONE")
-    }
-
-    // TODO: replace with anchors
-    Widget {
-        id: widgetBase
-        visible: false
     }
 }

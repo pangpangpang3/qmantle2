@@ -36,7 +36,7 @@ Image {
         anchors.topMargin: homeScreen.titleBar.height
 
         Widget {
-            requiredXCells: 2
+            requiredYCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "blue"
