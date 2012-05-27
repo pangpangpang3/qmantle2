@@ -113,41 +113,6 @@ Item {
                                 }
                             }
 
-                            // anchor it
-                            // TODO: we should delay anchoring until the grid is
-                            // setup, perhaps
-                            if (currentX == 0) {
-                                obj.anchors.left = layout.left
-                            } else {
-                                for (var checkX = currentX - 1; ; checkX--) {
-                                    if (checkX < 0) {
-                                        console.log("CANNOT CREATE LEFT ANCHOR")
-                                        break
-                                    }
-
-                                    if (grid[currentY][checkX]) {
-                                        obj.anchors.left = grid[currentY][checkX].right
-                                        break
-                                    }
-                                }
-                            }
-
-                            if (currentY == 0) {
-                                obj.anchors.top = layout.top
-                            } else {
-                                for (checkY = currentY - 1; ; checkY--) {
-                                    if (checkY < 0) {
-                                        console.log("CANNOT CREATE LEFT ANCHOR")
-                                        break;
-                                    }
-
-                                    if (grid[checkY][currentX]) {
-                                        obj.anchors.top = grid[checkY][currentX].bottom
-                                        break
-                                    }
-                                }
-                            }
-
                             //printGrid(grid)
                         }
                     }
@@ -160,6 +125,42 @@ Item {
             }
         }
 
-        console.log("LAYOUT DONE")
+        console.log("LAYOUT DONE, anchoring")
+
+        var currentY = 0
+        for (; currentY < grid.length; currentY++) {
+            for (var currentX = 0; currentX < grid[currentY].length; currentX++) {
+                var obj = grid[currentY][currentX]
+                if (obj) {
+                    for (var checkX = currentX - 1; ; checkX--) {
+                        if (checkX < 0) {
+                            // probably on the left-most cell
+                            obj.anchors.left = layout.left
+                            break
+                        }
+
+                        if (grid[currentY][checkX]) {
+                            if (grid[currentY][checkX] != obj)
+                                obj.anchors.left = grid[currentY][checkX].right
+                            break
+                        }
+                    }
+
+                    for (var checkY = currentY - 1; ; checkY--) {
+                        if (checkY < 0) {
+                            // probably on the top-most cell
+                            obj.anchors.top = layout.top
+                            break;
+                        }
+
+                        if (grid[checkY][currentX]) {
+                            if (grid[checkY][currentX] != obj)
+                                obj.anchors.top = grid[checkY][currentX].bottom
+                            break
+                        }
+                    }
+                }
+            }
+        }
     }
 }
