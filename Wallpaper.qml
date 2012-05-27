@@ -37,6 +37,11 @@ Image {
 
         Widget2x1 {
             id: widgetone
+            Rectangle {
+                anchors.fill: parent
+                color: "blue"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Phone"
@@ -44,6 +49,11 @@ Image {
             }
         }
         Widget1x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "gray"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Mail"
@@ -51,6 +61,11 @@ Image {
             }
         }
         Widget1x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "red"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Contacts"
@@ -58,6 +73,11 @@ Image {
             }
         }
         Widget2x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "orange"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
@@ -65,6 +85,11 @@ Image {
             }
         }
         Widget2x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "pink"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Phone"
@@ -72,6 +97,11 @@ Image {
             }
         }
         Widget1x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "green"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Mail"
@@ -79,6 +109,11 @@ Image {
             }
         }
         Widget1x1 {
+            Rectangle {
+                anchors.fill: parent
+                color: "black"
+                opacity: 0.5
+            }
             LauncherIcon {
                 anchors.fill: parent
                 title: "Contacts"
@@ -122,34 +157,6 @@ Image {
             }
         }
 
-        Widget1x1 {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Phone"
-                iconId: "icon-l-telephony.png"
-            }
-        }
-        Widget1x1 {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Mail"
-                iconId: "icon-l-mail.png"
-            }
-        }
-        Widget1x1 {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Contacts"
-                iconId: "icon-l-contacts.png"
-            }
-        }
-        Widget1x1 {
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Notes"
-                iconId: "icon-l-notes.png"
-            }
-        }
     }
 }
 
