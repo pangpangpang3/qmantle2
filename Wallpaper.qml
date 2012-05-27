@@ -1,6 +1,7 @@
 import QtQuick 2.0
 
 import "constants.js" as Constants
+import "widgets"
 
 Image {
     id: wallpaper
@@ -35,19 +36,18 @@ Image {
         anchors.fill: parent
         anchors.topMargin: homeScreen.titleBar.height
 
-        Widget {
-            requiredYCells: 2
-            Rectangle {
-                anchors.fill: parent
-                color: "blue"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Phone"
-                iconId: "icon-l-telephony.png"
-            }
+        ClockWidget {
         }
+
+        ClockWidget {
+            requiredXCells: 2
+            requiredYCells: 2
+        }
+
+        ClockWidget {
+            requiredXCells: 2
+        }
+
         Widget {
             requiredXCells: 2
             Rectangle {
