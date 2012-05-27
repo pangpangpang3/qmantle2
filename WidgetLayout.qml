@@ -76,7 +76,7 @@ Item {
             obj.anchors.right = undefined
 
             console.log("Trying to find a space in the grid for object of size " + obj.requiredXCells + "x" + obj.requiredYCells)
-            printGrid(grid)
+            //printGrid(grid)
 
             var currentY = 0
             var positioned = false
@@ -148,7 +148,7 @@ Item {
                                 }
                             }
 
-                            printGrid(grid)
+                            //printGrid(grid)
                         }
                     }
                 }
