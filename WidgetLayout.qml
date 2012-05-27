@@ -129,7 +129,7 @@ Item {
     }
 
     // TODO: replace with anchors
-    WidgetBase {
+    Widget {
         id: widgetBase
         visible: false
     }

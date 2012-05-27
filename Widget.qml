@@ -16,6 +16,9 @@ Item {
             return (homeScreen.height - homeScreen.titleBar.height) / 4
     }
 
-    property int requiredXCells
-    property int requiredYCells
+    property int requiredXCells: 1
+    property int requiredYCells: 1
+
+    width: baseWidth * requiredXCells
+    height: baseHeight * requiredYCells
 }

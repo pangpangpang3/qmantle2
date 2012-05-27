@@ -35,8 +35,8 @@ Image {
         anchors.fill: parent
         anchors.topMargin: homeScreen.titleBar.height
 
-        Widget2x1 {
-            id: widgetone
+        Widget {
+            requiredYCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "blue"
@@ -48,7 +48,8 @@ Image {
                 iconId: "icon-l-telephony.png"
             }
         }
-        Widget1x1 {
+        Widget {
+            requiredXCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "gray"
@@ -60,7 +61,7 @@ Image {
                 iconId: "icon-l-mail.png"
             }
         }
-        Widget1x1 {
+        Widget {
             Rectangle {
                 anchors.fill: parent
                 color: "red"
@@ -72,7 +73,8 @@ Image {
                 iconId: "icon-l-contacts.png"
             }
         }
-        Widget2x1 {
+        Widget {
+            requiredXCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "orange"
@@ -84,7 +86,8 @@ Image {
                 iconId: "icon-l-notes.png"
             }
         }
-        Widget2x1 {
+        Widget {
+            requiredXCells: 2
             Rectangle {
                 anchors.fill: parent
                 color: "pink"
@@ -96,7 +99,7 @@ Image {
                 iconId: "icon-l-telephony.png"
             }
         }
-        Widget1x1 {
+        Widget {
             Rectangle {
                 anchors.fill: parent
                 color: "green"
@@ -108,7 +111,7 @@ Image {
                 iconId: "icon-l-mail.png"
             }
         }
-        Widget1x1 {
+        Widget {
             Rectangle {
                 anchors.fill: parent
                 color: "black"
@@ -120,7 +123,7 @@ Image {
                 iconId: "icon-l-contacts.png"
             }
         }
-        Widget1x1 {
+        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
@@ -128,28 +131,28 @@ Image {
             }
         }
 
-        Widget1x1 {
+        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Phone"
                 iconId: "icon-l-telephony.png"
             }
         }
-        Widget1x1 {
+        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Mail"
                 iconId: "icon-l-mail.png"
             }
         }
-        Widget1x1 {
+        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Contacts"
                 iconId: "icon-l-contacts.png"
             }
         }
-        Widget1x1 {
+        Widget {
             LauncherIcon {
                 anchors.fill: parent
                 title: "Notes"
