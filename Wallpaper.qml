@@ -1,7 +1,6 @@
 import QtQuick 2.0
 
 import "constants.js" as Constants
-import "widgets"
 
 Image {
     id: wallpaper
@@ -14,6 +13,7 @@ Image {
     property int initialX
     asynchronous: true
     fillMode: Image.PreserveAspectCrop
+    property alias widgets: widgetLayout.children
 
     onInitialXChanged: setPosition(initialX)
 
@@ -33,121 +33,9 @@ Image {
 
     // widgets
     WidgetLayout {
+        id: widgetLayout
         anchors.fill: parent
         anchors.topMargin: homeScreen.titleBar.height
-
-        ClockWidget {
-        }
-
-        ClockWidget {
-            requiredXCells: 2
-            requiredYCells: 2
-        }
-
-        ClockWidget {
-            requiredXCells: 2
-        }
-
-        Widget {
-            requiredXCells: 2
-            Rectangle {
-                anchors.fill: parent
-                color: "gray"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Mail"
-                iconId: "icon-l-mail.png"
-            }
-        }
-        Widget {
-            Rectangle {
-                anchors.fill: parent
-                color: "red"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Contacts"
-                iconId: "icon-l-contacts.png"
-            }
-        }
-        Widget {
-            requiredXCells: 2
-            Rectangle {
-                anchors.fill: parent
-                color: "orange"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Notes"
-                iconId: "icon-l-notes.png"
-            }
-        }
-        Widget {
-            requiredXCells: 2
-            Rectangle {
-                anchors.fill: parent
-                color: "pink"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Phone"
-                iconId: "icon-l-telephony.png"
-            }
-        }
-        Widget {
-            Rectangle {
-                anchors.fill: parent
-                color: "green"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Mail"
-                iconId: "icon-l-mail.png"
-            }
-        }
-        Widget {
-            requiredYCells: 2
-            Rectangle {
-                anchors.fill: parent
-                color: "black"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Contacts"
-                iconId: "icon-l-contacts.png"
-            }
-        }
-        Widget {
-            Rectangle {
-                anchors.fill: parent
-                color: "black"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Notes"
-                iconId: "icon-l-notes.png"
-            }
-        }
-        Widget {
-            Rectangle {
-                anchors.fill: parent
-                color: "gray"
-                opacity: 0.5
-            }
-            LauncherIcon {
-                anchors.fill: parent
-                title: "Notes"
-                iconId: "icon-l-notes.png"
-            }
-        }
     }
 }
 

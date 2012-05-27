@@ -5,9 +5,15 @@ import ".."
 Widget {
     id: clock
     Rectangle {
-        color: "black"
-        anchors.fill: parent
-        opacity: 0.3
+        anchors.centerIn: parent
+        width: parent.height
+        height: parent.width
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: Qt.rgba(0, 0, 0, 0) }
+            GradientStop { position: 1; color: Qt.rgba(0, 0, 0, 255) }
+        }
+
+        rotation: 90
     }
 
     Text {

@@ -1,5 +1,7 @@
 import QtQuick 2.0
 
+import "widgets"
+
 Item {
     id: wallpaperContainer
     anchors.fill: parent
@@ -114,6 +116,11 @@ Item {
         asynchronous: false
 
         Component.onCompleted: asynchronous = true
+
+        widgets: [
+            ClockWidget {
+            }
+        ]
     }
 
     Wallpaper {
