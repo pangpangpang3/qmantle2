@@ -2,9 +2,6 @@ import QtQuick 2.0
 
 Image {
     id: titleBar
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
     source: "assets/chrome/wmTitleBar.png";
     fillMode: Image.TileHorizontally
 

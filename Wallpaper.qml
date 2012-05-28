@@ -35,7 +35,7 @@ Image {
     WidgetLayout {
         id: widgetLayout
         anchors.fill: parent
-        anchors.topMargin: homeScreen.titleBar.height
+        anchors.bottomMargin: homeScreen.titleBar.height
     }
 }
 

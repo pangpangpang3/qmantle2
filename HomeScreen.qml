@@ -33,6 +33,9 @@ Item {
         TitleBar {
             id: titleBar
             opacity: 0.8
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
 
             onClicked: {
                 Constants.loadSingleton("Launcher.qml", homeScreen, function(launcher) {
