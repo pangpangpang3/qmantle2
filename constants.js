@@ -3,6 +3,11 @@ var portrait = 90
 var reverseLandscape = 180
 var reversePortrait = 270
 
+var homescreenWidgetRowsPortrait = 4
+var homescreenWidgetColumnsPortrait = 3
+var homescreenWidgetRowsLandscape = homescreenWidgetColumnsPortrait
+var homescreenWidgetColumnsLandscape = homescreenWidgetRowsPortrait
+
 var screen = { width: 960, height: 600 };
 
 var singletonObjects = {}

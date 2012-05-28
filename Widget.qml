@@ -5,15 +5,15 @@ import "constants.js" as Constants
 Item {
     property int baseWidth: {
         if (homeScreen.orientation == Constants.landscape)
-           return homeScreen.width / 4
+           return homeScreen.width / Constants.homescreenWidgetColumnsLandscape
         else
-           return homeScreen.width / 3
+           return homeScreen.width / Constants.homescreenWidgetColumnsPortrait
     }
     property int baseHeight: {
         if (homeScreen.orientation == Constants.landscape)
-            return (homeScreen.height - homeScreen.titleBar.height) / 3
+            return (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsLandscape
         else
-            return (homeScreen.height - homeScreen.titleBar.height) / 4
+            return (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsPortrait
     }
 
     property int requiredXCells: 1

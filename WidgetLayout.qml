@@ -79,17 +79,15 @@ Item {
         /* we start the layout process by creating an empty grid which will fit
          * the requisite number of cells.
          */
-        var grid
-        if (homeScreen.orientation == Constants.landscape) {
-            console.log("Landscape grid")
-            grid = [ [ 0, 0, 0, 0 ],
-                     [ 0, 0, 0, 0 ],
-                     [ 0, 0, 0, 0 ] ]
-        } else {
-            grid = [ [ 0, 0, 0 ],
-                     [ 0, 0, 0 ],
-                     [ 0, 0, 0 ],
-                     [ 0, 0, 0 ] ]
+        var grid = []
+        var rows = homeScreen.orientation == Constants.landscape ? Constants.homescreenWidgetRowsLandscape : Constants.homescreenWidgetRowsPortrait
+        var cols = homeScreen.orientation == Constants.landscape ? Constants.homescreenWidgetColumnsLandscape : Constants.homescreenWidgetColumnsPortrait
+
+        for (var i = 0; i < rows; ++i) {
+            grid.push([])
+            for (var j = 0; j < cols; ++j) {
+                grid[i].push(0)
+            }
         }
 
         console.log("DOING LAYOUT FOR " + layout.children.length + " ITEMS")
