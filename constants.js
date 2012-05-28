@@ -10,6 +10,7 @@ var homescreenWidgetColumnsLandscape = homescreenWidgetRowsPortrait
 
 var screen = { width: 960, height: 600 };
 
+var componentCache = {}
 var singletonObjects = {}
 
 function loadSingleton(fileName, parent, callback, data) {
@@ -27,18 +28,33 @@ function loadSingleton(fileName, parent, callback, data) {
     });
 }
 
-// TODO: component cache
 function loadComponent(fileName, callback) {
-    // TODO: handle loading multiple components at once
-    // needed for async loading
+    if (componentCache[fileName]) {
+        callback(componentCache[fileName])
+        return
+    }
+
+    // TODO: can Qt.createComponent work asynchronously (even for local files)
+    // like Loader?
     var loadingComponent = Qt.createComponent(fileName);
 
-    // TODO: handle async loading
     if (!loadingComponent) {
         console.log("FAILED LOADING COMPONENT: " + fileName + " - " + loadingComponent.errorString())
         return
     }
 
-    callback(loadingComponent);
+    if (loadingComponent.status == Component.Ready) {
+        componentCache[fileName] = loadingComponent
+        callback(loadingComponent)
+    } else {
+        loadingComponent.statusChanged.connect(function() {
+            if (loadingComponent.status == Component.Ready) {
+                componentCache[fileName] = loadingComponent
+                callback(loadingComponent)
+            } else if (loadingComponent.status == Component.Error) {
+                console.log("FAILED LOADING COMPONENT: " + fileName + " - " + loadingComponent.errorString())
+            }
+        })
+    }
 }
 
