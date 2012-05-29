@@ -146,6 +146,8 @@ Item {
                             console.log("Positioning at " + currentX + "x" + currentY + " to " + (currentX + obj.requiredXCells) + "x" + (currentY + obj.requiredYCells))
                             positioned = obj.visible = true
                             var checkY = currentY
+                            obj.x = obj.baseWidth * currentX
+                            obj.y = obj.baseHeight * currentY
 
                             for (; checkY < currentY + obj.requiredYCells; ++checkY) {
                                 for (var checkX = currentX; checkX < currentX + obj.requiredXCells; ++checkX) {
@@ -170,46 +172,6 @@ Item {
             }
         }
 
-        console.log("LAYOUT DONE, anchoring")
-
-        /* once we've laid out the grid more or less how we want it, we need to
-         * anchor items together to ensure that when the layout moves, the items
-         * within it move as well.
-         */
-        var currentY = 0
-        for (; currentY < grid.length; currentY++) {
-            for (var currentX = 0; currentX < grid[currentY].length; currentX++) {
-                var obj = grid[currentY][currentX]
-                if (obj) {
-                    for (var checkX = currentX - 1; ; checkX--) {
-                        if (checkX < 0) {
-                            // probably on the left-most cell
-                            obj.anchors.left = layout.left
-                            break
-                        }
-
-                        if (grid[currentY][checkX]) {
-                            if (grid[currentY][checkX] != obj)
-                                obj.anchors.left = grid[currentY][checkX].right
-                            break
-                        }
-                    }
-
-                    for (var checkY = currentY - 1; ; checkY--) {
-                        if (checkY < 0) {
-                            // probably on the top-most cell
-                            obj.anchors.top = layout.top
-                            break;
-                        }
-
-                        if (grid[checkY][currentX]) {
-                            if (grid[checkY][currentX] != obj)
-                                obj.anchors.top = grid[checkY][currentX].bottom
-                            break
-                        }
-                    }
-                }
-            }
-        }
+        console.log("LAYOUT DONE")
     }
 }
