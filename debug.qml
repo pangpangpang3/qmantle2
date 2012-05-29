@@ -80,6 +80,8 @@ Item {
 
     FPSMonitor {
         id: fpsMonitor
+        anchors.left: parent.left
+        anchors.top: rotateControl.bottom
     }
 }
 
