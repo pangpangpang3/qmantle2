@@ -11,8 +11,10 @@ Widget {
 
     function timeChanged() {
         var date = new Date;
-        hours = date.getHours()
-        minutes = date.getMinutes()
+        if (date.getHours() != hours)
+            hours = date.getHours()
+        if (date.getMinutes() != minutes)
+            minutes = date.getMinutes()
         seconds = date.getUTCSeconds();
     }
 
@@ -72,9 +74,12 @@ Widget {
                     id: hourRotation
                     angle: ((clock.hours * 30) + (clock.minutes * 0.5)) - 180
                     // XXX: the SpringAnimation here seems to cause huge CPU use
-//                    Behavior on angle {
-//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-//                    }
+                    Behavior on angle {
+                        NumberAnimation {
+                            easing.type: Easing.InOutQuad
+                            duration: 300
+                        }
+                    }
                 }
             }
 
@@ -87,9 +92,12 @@ Widget {
                 transform: Rotation {
                     id: minuteRotation
                     angle: (clock.minutes * 6) - 180
-//                    Behavior on angle {
-//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-//                    }
+                    Behavior on angle {
+                        NumberAnimation {
+                            easing.type: Easing.InOutQuad
+                            duration: 300
+                        }
+                    }
                 }
             }
 
@@ -102,9 +110,6 @@ Widget {
                 transform: Rotation {
                     id: secondRotation
                     angle: (clock.seconds * 6) - 180
-//                    Behavior on angle {
-//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-//                    }
                 }
             }
 
