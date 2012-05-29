@@ -29,19 +29,13 @@ Item {
                 }
             }
 
-            var obj = objArr[lowest].obj
+            var obj = objArr[lowest]
             objArr.splice(lowest, 1)
             return obj
         }
 
         function updatePositions() {
-            // you'd think I could just pass one, two, three directly into an
-            // array. hahahahaha. doesn't seem to work.
-            var o1 = new Object; o1.x = one.x;   o1.obj = one
-            var o2 = new Object; o2.x = two.x;   o2.obj = two
-            var o3 = new Object; o3.x = three.x; o3.obj = three
-
-            var arr = [ o1, o2, o3 ]
+            var arr = [ one, two, three ]
 
             leftMost = findLowest(arr);
             center = findLowest(arr);
