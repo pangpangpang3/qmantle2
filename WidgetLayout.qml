@@ -20,13 +20,13 @@ Item {
      * so we use a 0ms timer to trigger a relayout when the mainloop has ticked
      * again.
      */
-    onChildrenChanged: relayout.restart()
-    onWidthChanged: relayout.restart()
-    onHeightChanged: relayout.restart()
+    onChildrenChanged: if (!relayout.running) relayout.restart()
+    onWidthChanged: if (!relayout.running) relayout.restart()
+    onHeightChanged: if (!relayout.running) relayout.restart()
 
     Timer {
         id: relayout
-        interval: 0
+        interval: 16
         running: false
         repeat: false
         onTriggered: performLayout()
@@ -37,7 +37,7 @@ Item {
      */
     Component.onCompleted: {
         ready = true
-        relayout.restart()
+        if (!relayout.running) relayout.restart()
     }
 
     /* little debugging tool: useful for diagnosing problems in grid positioning
