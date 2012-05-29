@@ -71,9 +71,10 @@ Widget {
                 transform: Rotation {
                     id: hourRotation
                     angle: ((clock.hours * 30) + (clock.minutes * 0.5)) - 180
-                    Behavior on angle {
-                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-                    }
+                    // XXX: the SpringAnimation here seems to cause huge CPU use
+//                    Behavior on angle {
+//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+//                    }
                 }
             }
 
@@ -86,9 +87,9 @@ Widget {
                 transform: Rotation {
                     id: minuteRotation
                     angle: (clock.minutes * 6) - 180
-                    Behavior on angle {
-                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-                    }
+//                    Behavior on angle {
+//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+//                    }
                 }
             }
 
@@ -101,9 +102,9 @@ Widget {
                 transform: Rotation {
                     id: secondRotation
                     angle: (clock.seconds * 6) - 180
-                    Behavior on angle {
-                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
-                    }
+//                    Behavior on angle {
+//                        SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
+//                    }
                 }
             }
 
