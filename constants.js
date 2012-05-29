@@ -5,8 +5,8 @@ var reversePortrait = 270
 
 var homescreenWidgetRowsPortrait = 4
 var homescreenWidgetColumnsPortrait = 3
-var homescreenWidgetRowsLandscape = homescreenWidgetColumnsPortrait
-var homescreenWidgetColumnsLandscape = homescreenWidgetRowsPortrait
+var homescreenWidgetRowsLandscape = 3
+var homescreenWidgetColumnsLandscape = 4
 
 var screen = { width: 960, height: 600 };
 
