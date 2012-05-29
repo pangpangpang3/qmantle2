@@ -28,13 +28,6 @@ Widget {
             width: height
             color: "black"
 
-            Behavior on x {
-                NumberAnimation {
-                    easing.type: Easing.OutExpo
-                    duration: 400
-                }
-            }
-
             Rectangle {
                 id: _12
                 width: 4
