@@ -4,8 +4,24 @@ import "constants.js" as Constants
 
 // for testing homeScreen rotation animations
 Item {
-    height: 1050
-    width: 1680
+    property int maxWidth: homeScreen.width + 400
+    property int maxHeight: homeScreen.height + 400
+
+    Connections {
+        target: homeScreen
+        onWidthChanged: {
+            if (homeScreen.width > maxWidth)
+                maxWidth = homeScreen.width
+        }
+
+        onHeightChanged: {
+            if (homeScreen.height > maxHeight)
+                maxHeight = homeScreen.height
+        }
+    }
+
+    height: maxHeight
+    width: maxWidth
 
     Item {
         x: 400
