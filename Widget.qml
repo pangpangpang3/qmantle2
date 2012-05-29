@@ -25,14 +25,12 @@ Item {
 
     Behavior on x {
         NumberAnimation {
-            easing.type: Easing.InOut
             duration: 200
         }
     }
 
     Behavior on y {
         NumberAnimation {
-            easing.type: Easing.InOut
             duration: 200
         }
     }
