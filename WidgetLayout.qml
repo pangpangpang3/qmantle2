@@ -64,6 +64,49 @@ Item {
         console.log(str)
     }
 
+    /* determines whether \a obj can fit at the specified \a x and \a y
+     * coordinates of the \a grid, given the desired size of the object.
+     */
+    function canFit(grid, obj, x, y) {
+        if (y + obj.requiredYCells > grid.length || x + obj.requiredXCells > grid[y].length) {
+            console.log("Too long at " + x + "x" + y)
+            return false
+        }
+
+        /* check if all required cells starting at x,y are free. */
+        for (var checkY = y; checkY < y + obj.requiredYCells; checkY++) {
+            for (var checkX = x; checkX < x + obj.requiredXCells; checkX++) {
+                console.log("CHECKING " + checkX + "x" + checkY)
+                if (grid[checkY][checkX])
+                    return false
+            }
+        }
+
+        console.log("Not taken at " + x + "x" + y)
+        return true
+    }
+
+    /* find a space in the grid to fit \a obj in \a grid, keeping its required size in mind
+     */
+    function findPositionFor(grid, obj) {
+        if (homeScreen.orientation == Constants.landscape && obj.desiredXLandscape != undefined)
+            if (canFit(grid, obj, obj.desiredXLandscape, obj.desiredYLandscape))
+                return { x: obj.desiredXLandscape, y: obj.desiredYLandscape }
+        else if (obj.desiredXPortrait != undefined)
+            if (canFit(grid, obj, obj.desiredXPortrait, obj.desiredYPortrait))
+                return { x: obj.desiredXPortrait, y: obj.desiredYPortrait }
+
+        for (var currentY = 0; currentY < grid.length; ++currentY) {
+            for (var currentX = 0; currentX < grid[currentY].length; ++currentX) {
+                console.log("Checking canFit for " + currentX + "x" + currentY)
+                if (canFit(grid, obj, currentX, currentY))
+                    return { x: currentX, y: currentY }
+            }
+        }
+
+        return undefined
+    }
+
     /* the meat of the layout */
     function performLayout() {
         if (!layout.ready) {
@@ -99,77 +142,35 @@ Item {
         for (var i = 0; i < layout.children.length; ++i) {
             var obj = layout.children[i]
 
-            obj.anchors.top = undefined
-            obj.anchors.bottom = undefined
-            obj.anchors.left = undefined
-            obj.anchors.right = undefined
-
             console.log("Trying to find a space in the grid for object of size " + obj.requiredXCells + "x" + obj.requiredYCells)
             //printGrid(grid)
 
-            var currentY = 0
-            var positioned = false
-
-            for (; !positioned && currentY < grid.length; currentY++) {
-                /* if the object is too tall to fit in the grid, then just stop
-                 * now, there's no point proceeding further
-                 */
-                if (currentY + obj.requiredYCells > grid.length)
-                    break
-                for (var currentX = 0; !positioned && currentX < grid[currentY].length; currentX++) {
-                    /* if the object is too long to fit on this row, then
-                     * proceed to the next row.
-                     */
-                    if (currentX + obj.requiredXCells > grid[currentY].length)
-                        break
-
-                    /* check if this cell is free. if it is, check if the
-                     * adjacent required cells are free, and if they are, we're
-                     * in luck.
-                     */
-                    if (!grid[currentY][currentX]) {
-                        var taken = false
-                        var checkY = currentY
-
-                        for (; !taken && checkY < currentY + obj.requiredYCells; checkY++) {
-                            for (var checkX = currentX; !taken && checkX < currentX + obj.requiredXCells; checkX++) {
-                                if (grid[checkY][checkX]) {
-                                    console.log("Taken at " + checkX + "x" + checkY)
-                                    taken = true
-                                    break;
-                                }
-                            }
-                        }
-
-                        /* if we can fit here, then claim these lands. */
-                        if (!taken) {
-                            console.log("Positioning at " + currentX + "x" + currentY + " to " + (currentX + obj.requiredXCells) + "x" + (currentY + obj.requiredYCells))
-                            positioned = obj.visible = true
-                            var checkY = currentY
-                            obj.x = obj.baseWidth * currentX
-                            obj.y = obj.baseHeight * currentY
-
-                            for (; checkY < currentY + obj.requiredYCells; ++checkY) {
-                                for (var checkX = currentX; checkX < currentX + obj.requiredXCells; ++checkX) {
-                                    // place it
-                                    grid[checkY][checkX] = obj
-                                }
-                            }
-
-                            //printGrid(grid)
-                        }
-                    }
-                }
-            }
+            var pos = findPositionFor(grid, obj)
 
             /* this is pretty bad: object won't fit on the grid, so it won't be
              * visible to the user at all. there's really nothing we can do
              * about this though.
              */
-            if (!positioned) {
+            if (pos == undefined) {
                 console.log("object of " + obj.requiredXCells + "x" + obj.requiredYCells + " won't fit in the available space")
                 obj.visible = false
+                continue
             }
+
+            /* if we can fit here, then claim these lands. */
+            console.log("Positioning at " + pos.x + "x" + pos.y + " to " + (pos.x + obj.requiredXCells) + "x" + (pos.y + obj.requiredYCells))
+            obj.visible = true
+            obj.x = obj.baseWidth * pos.x
+            obj.y = obj.baseHeight * pos.y
+
+            for (var checkY = pos.y; checkY < pos.y + obj.requiredYCells; ++checkY) {
+                for (var checkX = pos.x; checkX < pos.x + obj.requiredXCells; ++checkX) {
+                    // place it
+                    grid[checkY][checkX] = obj
+                }
+            }
+
+            printGrid(grid)
         }
 
         console.log("LAYOUT DONE")

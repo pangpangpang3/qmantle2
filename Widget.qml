@@ -20,6 +20,11 @@ Item {
     property int requiredXCells: 1
     property int requiredYCells: 1
 
+    property int desiredXPortrait: undefined
+    property int desiredXLandscape: undefined
+    property int desiredYPortrait: undefined
+    property int desiredYLandscape: undefined
+
     width: baseWidth * requiredXCells
     height: baseHeight * requiredYCells
 
