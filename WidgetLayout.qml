@@ -76,13 +76,13 @@ Item {
         /* check if all required cells starting at x,y are free. */
         for (var checkY = y; checkY < y + obj.requiredYCells; checkY++) {
             for (var checkX = x; checkX < x + obj.requiredXCells; checkX++) {
-                console.log("CHECKING " + checkX + "x" + checkY)
+//                console.log("CHECKING " + checkX + "x" + checkY)
                 if (grid[checkY][checkX])
                     return false
             }
         }
 
-        console.log("Not taken at " + x + "x" + y)
+//        console.log("Not taken at " + x + "x" + y)
         return true
     }
 
@@ -98,7 +98,7 @@ Item {
 
         for (var currentY = 0; currentY < grid.length; ++currentY) {
             for (var currentX = 0; currentX < grid[currentY].length; ++currentX) {
-                console.log("Checking canFit for " + currentX + "x" + currentY)
+//                console.log("Checking canFit for " + currentX + "x" + currentY)
                 if (canFit(grid, obj, currentX, currentY))
                     return { x: currentX, y: currentY }
             }
@@ -170,7 +170,7 @@ Item {
                 }
             }
 
-            printGrid(grid)
+            //printGrid(grid)
         }
 
         console.log("LAYOUT DONE")
