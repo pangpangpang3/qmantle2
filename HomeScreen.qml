@@ -80,7 +80,10 @@ Item {
             }
         }
     }
-
+/*
+ * Temporarily disabled, this seems to break SketchWidget somehow.
+ * See: https://bugreports.qt-project.org/browse/QTBUG-26005
+ *
     FastBlur {
         id: blur
         anchors.fill: parent
@@ -92,7 +95,7 @@ Item {
                 duration: 500
             }
         }
-    }
+    }*/
 
     Behavior on width {
         NumberAnimation {

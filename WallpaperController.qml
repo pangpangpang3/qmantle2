@@ -113,6 +113,8 @@ Item {
 
         widgets: [
             ClockWidget {
+            },
+            SketchWidget {
             }
         ]
     }
