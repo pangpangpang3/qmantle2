@@ -74,12 +74,13 @@ Widget {
                     id: hourRotation
                     angle: ((clock.hours * 30) + (clock.minutes * 0.5)) - 180
                     // XXX: the SpringAnimation here seems to cause huge CPU use
+                    /*
                     Behavior on angle {
                         NumberAnimation {
                             easing.type: Easing.InOutQuad
                             duration: 300
                         }
-                    }
+                    }*/
                 }
             }
 
@@ -92,12 +93,13 @@ Widget {
                 transform: Rotation {
                     id: minuteRotation
                     angle: (clock.minutes * 6) - 180
+                    /*
                     Behavior on angle {
                         NumberAnimation {
                             easing.type: Easing.InOutQuad
                             duration: 300
                         }
-                    }
+                    }*/
                 }
             }
 
