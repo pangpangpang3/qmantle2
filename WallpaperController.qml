@@ -112,9 +112,18 @@ Item {
         Component.onCompleted: asynchronous = true
 
         widgets: [
+            PhotoWidget {
+                source: "assets/wallpapers/wallpaper.jpg"
+            },
             ClockWidget {
             },
+            PhotoWidget {
+                source: "assets/wallpapers/FrancesOneMonth.jpg"
+            },
             SketchWidget {
+            },
+            PhotoWidget {
+                source: "assets/wallpapers/FoxyOneMonth.jpg"
             }
         ]
     }
