@@ -5,25 +5,33 @@ Image {
     property bool isOpen: false
     property int oheight
     property int owidth
-    anchors.centerIn: parent
-    visible: width != owidth
+    opacity: 0
 
-    function show(item) {
+    property int oldx
+    property int oldy
+
+    function show(item, thumbx, thumby) {
         source = item.source
 
+        x = oldx = thumbx
+        y = oldy = thumby
         height = oheight = item.height
         width = owidth = item.width
+        opacity = 1
 
         isOpen = true
         width = parent.width
         height = parent.height
-        opacity = 1
+        x = 0
+        y = 0
     }
 
     function close() {
         height = oheight
         width = owidth
         opacity = 0
+        x = oldx
+        y = oldy
         isOpen = false
     }
 
@@ -51,7 +59,21 @@ Image {
         enabled: window.isOpen
         NumberAnimation {
             easing.type: Easing.InOutQuad
-            duration: 400
+            duration: 500
+        }
+    }
+    Behavior on x {
+        enabled: window.isOpen
+        NumberAnimation {
+            easing.type: Easing.InOutQuad
+            duration: 500
+        }
+    }
+    Behavior on y {
+        enabled: window.isOpen
+        NumberAnimation {
+            easing.type: Easing.InOutQuad
+            duration: 500
         }
     }
 }

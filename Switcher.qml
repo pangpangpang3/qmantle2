@@ -91,7 +91,9 @@ PanelBase {
 
                         switcher.window = component.createObject(switcher)
                     }
-                    switcher.window.show(iconItem)
+
+                    var pos = switcher.mapFromItem(iconItem, 0, 0)
+                    switcher.window.show(iconItem, pos.x, pos.y)
                 }
             }
         }
