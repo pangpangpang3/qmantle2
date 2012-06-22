@@ -94,9 +94,8 @@ PanelBase {
     GridView {
         id: grid
         anchors.fill: parent
-        anchors.margins: 50
-        anchors.topMargin: 70 // XXX: FIXME: hardcoded, should be toolbar height
-        cellHeight: homeScreen.orientation == Constants.landscape ? width / 7 : width / 4
+        anchors.margins: 30
+        cellHeight: homeScreen.orientation == Constants.landscape ? width / 5 : width / 3
         cellWidth: cellHeight
         model: applicationsModel
         delegate: LauncherIcon {

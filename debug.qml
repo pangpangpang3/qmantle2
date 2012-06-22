@@ -24,7 +24,8 @@ Item {
     width: maxWidth
 
     Item {
-        x: 400
+        x: 200
+        y: 100
 
         HomeScreen {
             id: homeScreen

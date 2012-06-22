@@ -8,7 +8,8 @@ var homescreenWidgetColumnsPortrait = 3
 var homescreenWidgetRowsLandscape = 3
 var homescreenWidgetColumnsLandscape = 4
 
-var screen = { width: 960, height: 600 };
+// 1024x600
+var screen = { width: 1024, height: 768 };
 
 var componentCache = {}
 var singletonObjects = {}
