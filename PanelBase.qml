@@ -11,7 +11,7 @@ Item {
     Rectangle {
         id: wallpaper
         color: "black"
-        opacity: 0.5
+        opacity: 0.8
         anchors.fill: parent
     }
 
