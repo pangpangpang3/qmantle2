@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtGraphicalEffects 1.0
 
 import "constants.js" as Constants
 
@@ -23,13 +22,7 @@ Item {
         }
     }
 
-    Item {
-        id: blurrable
-        anchors.fill: parent
-
-        WallpaperController {
-        }
-
+    WallpaperController {
         TitleBar {
             id: titleBar
             opacity: 0.8
@@ -39,13 +32,6 @@ Item {
 
             onClicked: {
                 Constants.loadSingleton("Launcher.qml", homeScreen, function(launcher) {
-                    launcher.showing.connect(function() {
-                        blur.radius = 32
-                    });
-                    launcher.hiding.connect(function() {
-                        blur.radius = 0
-                    });
-
                     launcher.show();
                 });
             }
@@ -67,12 +53,6 @@ Item {
                     anchors.fill: parent
                     onClicked: {
                         Constants.loadSingleton("Switcher.qml", homeScreen, function(switcher) {
-                            switcher.showing.connect(function() {
-                                blur.radius = 32
-                            });
-                            switcher.hiding.connect(function() {
-                                blur.radius = 0
-                            });
                             switcher.show();
                         });
                     }
@@ -80,22 +60,6 @@ Item {
             }
         }
     }
-/*
- * Temporarily disabled, this seems to break SketchWidget somehow.
- * See: https://bugreports.qt-project.org/browse/QTBUG-26005
- *
-    FastBlur {
-        id: blur
-        anchors.fill: parent
-        source: blurrable
-
-        Behavior on radius {
-            NumberAnimation {
-                easing.type: Easing.InOutQuad
-                duration: 500
-            }
-        }
-    }*/
 
     Behavior on width {
         NumberAnimation {
