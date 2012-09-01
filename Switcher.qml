@@ -55,7 +55,7 @@ PanelBase {
         cellHeight: homeScreen.orientation == Constants.landscape ? width / 3 : width / 2
         cellWidth: cellHeight
         model: windowModel
-        delegate: Item {
+        delegate: MouseArea {
             id: delegate
             width: grid.cellWidth
             height: grid.cellHeight
@@ -76,25 +76,19 @@ PanelBase {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
-            MouseArea {
-                anchors.top: textItem.top
-                anchors.bottom: iconItem.bottom
-                anchors.right: iconItem.width > textItem.width ? iconItem.right : textItem.right
-                anchors.left: iconItem.x < textItem.x ? iconItem.left : textItem.left
-                onClicked: {
-                    if (!switcher.window) {
-                        var component = Qt.createComponent("Window.qml");
-                        if (component.status != Component.Ready) {
-                            console.log("FAILED LOADING COMPONENT")
-                            return
-                        }
-
-                        switcher.window = component.createObject(switcher)
+            onClicked: {
+                if (!switcher.window) {
+                    var component = Qt.createComponent("Window.qml");
+                    if (component.status != Component.Ready) {
+                        console.log("FAILED LOADING COMPONENT")
+                        return
                     }
 
-                    var pos = switcher.mapFromItem(iconItem, 0, 0)
-                    switcher.window.show(iconItem, pos.x, pos.y)
+                    switcher.window = component.createObject(switcher)
                 }
+
+                var pos = switcher.mapFromItem(iconItem, 0, 0)
+                switcher.window.show(iconItem, pos.x, pos.y)
             }
         }
     }

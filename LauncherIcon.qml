@@ -1,8 +1,11 @@
 import QtQuick 1.1
 
-Item {
+MouseArea {
     property alias title: textItem.text
     property string iconId
+    height: iconItem.height + textItem.height
+    width: iconItem.width > textItem.width ? iconItem.width : textItem.width
+
     Image {
         id: iconItem
         source: "assets/launchericons/" + parent.iconId;
@@ -17,14 +20,8 @@ Item {
         color: "white"
     }
 
-    MouseArea {
-        anchors.top: iconItem.top
-        anchors.bottom: textItem.bottom
-        anchors.right: iconItem.width > textItem.width ? iconItem.right : textItem.right
-        anchors.left: iconItem.x < textItem.x ? iconItem.left : textItem.left
-        onClicked: {
-            console.log("Clicked on " + parent.title)
-        }
+    onClicked: {
+        console.log("Clicked on " + title)
     }
 }
 
