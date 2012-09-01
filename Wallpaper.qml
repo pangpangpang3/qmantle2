@@ -7,13 +7,13 @@ Image {
     property variant behavior: wallpaperBehavior
     anchors.top: parent.top
     anchors.bottom: parent.bottom
-    sourceSize.width: Constants.screen.width
     sourceSize.height: Constants.screen.height
     width: parent.width
     property int initialX
     asynchronous: true
     fillMode: Image.PreserveAspectCrop
     property alias widgets: widgetLayout.children
+    clip: true
 
     onInitialXChanged: setPosition(initialX)
 
