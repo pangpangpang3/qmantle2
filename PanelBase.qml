@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-Item {
+MouseArea {
     id: panelBase
     anchors.fill: parent
     opacity: 0
@@ -8,16 +8,13 @@ Item {
     signal showing
     signal hiding
 
+    onClicked: hide()
+
     Rectangle {
         id: wallpaper
         color: "black"
         opacity: 0.8
         anchors.fill: parent
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: hide()
     }
 
     function show() {
