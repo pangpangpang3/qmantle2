@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 1.1
 
 import ".."
 
@@ -27,9 +27,9 @@ Widget {
                 anchors.fill: parent
                 anchors.margins: 10
                 sourceSize.width: _maxBaseWidth
-                sourceSize.height: _maxBaseHeight
                 fillMode: Image.PreserveAspectCrop
                 source: "../assets/wallpapers/wallpaper.jpg"
+                clip: true
             }
          }
     ]

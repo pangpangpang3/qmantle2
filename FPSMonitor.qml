@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 1.0
 
 // pretty much entirely stolen from:
 // https://github.com/capisce/motionblur/blob/master/main.qml

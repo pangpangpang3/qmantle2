@@ -1,10 +1,10 @@
-import QtQuick 2.0
+import QtQuick 1.1
 
 import "constants.js" as Constants
 
 PanelBase {
     id: switcher
-    property var window
+    property variant window
 
     ListModel {
         id: windowModel

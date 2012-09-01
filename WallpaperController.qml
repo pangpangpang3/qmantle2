@@ -1,14 +1,14 @@
-import QtQuick 2.0
+import QtQuick 1.1
 
 import "widgets"
 
 Item {
     id: wallpaperContainer
     anchors.fill: parent
-    property var pressX
-    property var leftMost: one
-    property var center: two
-    property var rightMost: three
+    property variant pressX
+    property variant leftMost: one
+    property variant center: two
+    property variant rightMost: three
     onWidthChanged: leftMost.setPosition(-wallpaperContainer.width)
 
     MouseArea {
@@ -119,8 +119,6 @@ Item {
             },
             PhotoWidget {
                 source: "assets/wallpapers/FrancesOneMonth.jpg"
-            },
-            SketchWidget {
             },
             PhotoWidget {
                 source: "assets/wallpapers/FoxyOneMonth.jpg"

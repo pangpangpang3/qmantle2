@@ -1,29 +1,19 @@
-import QtQuick 2.0
+import QtQuick 1.1
 
 import "constants.js" as Constants
 
 Item {
     property alias content: widgetContent.children
-    property int baseWidth: {
-        if (homeScreen.orientation == Constants.landscape)
-           return homeScreen.width / Constants.homescreenWidgetColumnsLandscape
-        else
-           return homeScreen.width / Constants.homescreenWidgetColumnsPortrait
-    }
-    property int baseHeight: {
-        if (homeScreen.orientation == Constants.landscape)
-            return (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsLandscape
-        else
-            return (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsPortrait
-    }
+    property int baseWidth:  (homeScreen.orientation == Constants.landscape) ? homeScreen.width / Constants.homescreenWidgetColumnsLandscape : homeScreen.width / Constants.homescreenWidgetColumnsPortrait
+    property int baseHeight: (homeScreen.orientation == Constants.landscape) ? (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsLandscape : (homeScreen.height - homeScreen.titleBar.height) / Constants.homescreenWidgetRowsPortrait
 
     property int requiredXCells: 1
     property int requiredYCells: 1
 
-    property int desiredXPortrait: undefined
-    property int desiredXLandscape: undefined
-    property int desiredYPortrait: undefined
-    property int desiredYLandscape: undefined
+    property int desiredXPortrait: 0
+    property int desiredXLandscape: 0
+    property int desiredYPortrait: 0
+    property int desiredYLandscape: 0
 
     width: baseWidth * requiredXCells
     height: baseHeight * requiredYCells

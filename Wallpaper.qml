@@ -1,10 +1,10 @@
-import QtQuick 2.0
+import QtQuick 1.1
 
 import "constants.js" as Constants
 
 Image {
     id: wallpaper
-    property var behavior: wallpaperBehavior
+    property variant behavior: wallpaperBehavior
     anchors.top: parent.top
     anchors.bottom: parent.bottom
     sourceSize.width: Constants.screen.width
