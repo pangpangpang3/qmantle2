@@ -4,6 +4,7 @@ MouseArea {
     id: panelBase
     anchors.fill: parent
     opacity: 0
+    visible: opacity > 0
 
     signal showing
     signal hiding
